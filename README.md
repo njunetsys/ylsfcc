@@ -1,4 +1,4 @@
-# 第一次课讲义：云计算与底座
+# 第一次课讲义：云计算与底座 已上传
 
 《数据中心的计算机》（The Data Center as a Computer, 4th ed.）中文讲义第一讲。
 
@@ -8,3 +8,5 @@
 - 讲义中以蓝色标注的段落为 2026 年权威数据更新，原文内容保留未删。
 
 在线阅读：https://njunetsys.github.io/ylsfcc/
+
+
