@@ -73,17 +73,165 @@ p.upd{color:#1f6feb;background:#f0f6ff;border-left:4px solid #1f6feb;border-radi
 p.upd b{color:#14324f}
 p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 </style>
+<style>
+/* ===== 悬浮目录（2026-11-13 新增） ===== */
+@media screen{html{scroll-behavior:smooth}}
+#tocbtn{display:none}
+.tocHd{font-weight:700;color:#14324f;font-size:15px;letter-spacing:1px;padding:0 0 8px;margin:0 0 6px;border-bottom:1px solid #d8e2ef}
+#tocclose{float:right;cursor:pointer;color:#1f6feb;font-weight:400;font-size:14px}
+.tocTree a{display:block;text-decoration:none;color:#1c2733;line-height:1.5;padding:3px 6px 3px 0;border-radius:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tocTree a:hover{background:#eaf1fe;color:#14324f}
+.tocTree a.on{background:#eaf1fe;color:#1f6feb;font-weight:700}
+.tocTree .l1{font-weight:700;color:#14324f;font-size:14.5px;margin-top:9px;white-space:normal;line-height:1.45}
+.tocTree .l2{font-size:13.5px;padding-left:9px;color:#34495e}
+.tocTree .l3{font-size:13px;padding-left:22px;color:#5b6b7b}
+.tocTree .l4{font-size:12.5px;padding-left:36px;color:#7b8a99}
+.tocTree[data-level="2"] .l3,.tocTree[data-level="2"] .l4{display:none}
+@media screen and (max-width:1399px){
+ #tocbtn{display:block;position:fixed;right:14px;bottom:18px;z-index:50;background:#14324f;color:#fff;border:0;border-radius:999px;padding:12px 19px;font-size:15px;box-shadow:0 5px 16px rgba(20,50,79,.32);cursor:pointer;font-family:inherit}
+ #tocmask{position:fixed;inset:0;background:rgba(16,38,58,.45);z-index:58;display:none}
+ #tocmask.open{display:block}
+ #tocdrawer{position:fixed;top:0;right:0;bottom:0;width:86%;max-width:360px;background:#fff;z-index:59;overflow-y:auto;padding:16px 16px 70px;transform:translateX(102%);transition:transform .24s ease;box-shadow:-4px 0 18px rgba(20,50,79,.16)}
+ #tocdrawer.open{transform:none}
+}
+@media screen and (min-width:1400px){
+ body{padding-right:290px}
+ #tocside{display:block;position:fixed;right:18px;top:70px;width:252px;max-height:calc(100vh - 96px);overflow-y:auto;background:#fff;border:1px solid #d8e2ef;border-radius:12px;padding:14px 8px 16px 15px;box-shadow:0 2px 14px rgba(20,50,79,.09);font-size:13.5px}
+ #tocside .tocHd{position:sticky;top:-14px;background:#fff;padding-top:2px;margin-bottom:8px}
+}
+.printtoc{display:none}
+h2.chead.cur{position:relative}
+h2.chead.cur:before{content:"";position:absolute;left:-16px;top:6px;bottom:6px;width:3px;background:#1f6feb;border-radius:2px}
+@media print{
+ #tocside,#tocbtn,#tocdrawer,#tocmask{display:none!important}
+ body{padding-right:0!important}
+ .printtoc{display:block!important;margin:0 0 22px;page-break-after:always}
+ .printtoc .ptocHd{font-size:25px;color:#14324f;margin:0 0 14px;letter-spacing:1px}
+ .printtoc .tocTree{column-count:2;column-gap:26px}
+ .printtoc .tocTree a{white-space:normal;overflow:visible;text-overflow:clip;padding:1px 4px 1px 0}
+ .printtoc .tocTree a.on{background:none;color:#1c2733;font-weight:inherit}
+ h2,h3,h4{page-break-after:avoid;page-break-inside:avoid}
+ fig{page-break-inside:avoid}
+ .wrap{max-width:none;padding:0}
+}
+@page{size:A4;margin:16mm 14mm}
+</style>
 </head>
 <body>
 <div class="wrap">
+<nav class="printtoc" aria-label="目录">
+<h2 class="ptocHd">目录</h2>
+<div class="tocTree" data-level="4">
+<a class="l1" href="#ch1" data-ch="ch1">第 1 章 引言</a>
+<a class="l2" href="#sec-1-1" data-ch="ch1">1.1 背景铺垫</a>
+<a class="l2" href="#sec-1-2" data-ch="ch1">1.2 仓库规模计算机（WSC）</a>
+<a class="l2" href="#sec-1-3" data-ch="ch1">1.3 区域与可用区</a>
+<a class="l2" href="#sec-1-4" data-ch="ch1">1.4 建筑与基础设施</a>
+<a class="l3" href="#sec-1-4-1" data-ch="ch1">1.4.1 服务器</a>
+<a class="l3" href="#sec-1-4-2" data-ch="ch1">1.4.2 存储</a>
+<a class="l3" href="#sec-1-4-3" data-ch="ch1">1.4.3 网络结构</a>
+<a class="l3" href="#sec-1-4-4" data-ch="ch1">1.4.4 能耗</a>
+<a class="l3" href="#sec-1-4-5" data-ch="ch1">1.4.5 故障与维修的应对</a>
+<a class="l2" href="#sec-1-5" data-ch="ch1">1.5 负载</a>
+<a class="l3" href="#sec-c1-s5-h1" data-ch="ch1">WSC 系统栈</a>
+<a class="l3" href="#sec-c1-s5-h2" data-ch="ch1">计算消费模型</a>
+<a class="l3" href="#sec-c1-s5-h3" data-ch="ch1">公有云与超大规模</a>
+<a class="l3" href="#sec-1-5-1" data-ch="ch1">1.5.1 通算负载</a>
+<a class="l4" href="#sec-1-5-1-1" data-ch="ch1">1.5.1.1 大致概览</a>
+<a class="l4" href="#sec-1-5-1-2" data-ch="ch1">1.5.1.2 案例研究：搜索</a>
+<a class="l4" href="#sec-1-5-1-3" data-ch="ch1">1.5.1.3 案例研究：YouTube</a>
+<a class="l4" href="#sec-1-5-1-4" data-ch="ch1">1.5.1.4 案例研究：Gmail</a>
+<a class="l3" href="#sec-1-5-2" data-ch="ch1">1.5.2 AI 负载</a>
+<a class="l4" href="#sec-1-5-2-1" data-ch="ch1">1.5.2.1 训练</a>
+<a class="l4" href="#sec-1-5-2-2" data-ch="ch1">1.5.2.2 推理</a>
+<a class="l4" href="#sec-1-5-2-3" data-ch="ch1">1.5.2.3 大语言模型</a>
+<a class="l4" href="#sec-1-5-2-4" data-ch="ch1">1.5.2.4 AI 计算的特征</a>
+<a class="l1" href="#ch2" data-ch="ch2">第 2 章 分布式系统基础设施：软件</a>
+<a class="l2" href="#sec-2-1" data-ch="ch2">2.1 软件栈总览</a>
+<a class="l2" href="#sec-2-2" data-ch="ch2">2.2 分布式系统</a>
+<a class="l3" href="#sec-2-2-1" data-ch="ch2">2.2.1 集群级基础设施</a>
+<a class="l4" href="#sec-2-2-1-1" data-ch="ch2">2.2.1.1 资源管理</a>
+<a class="l4" href="#sec-2-2-1-2" data-ch="ch2">2.2.1.2 基础基础设施软件</a>
+<a class="l3" href="#sec-2-2-2" data-ch="ch2">2.2.2 非结构化存储系统</a>
+<a class="l3" href="#sec-2-2-3" data-ch="ch2">2.2.3 结构化 WSC 存储</a>
+<a class="l3" href="#sec-2-2-4" data-ch="ch2">2.2.4 WAN 与边缘网络</a>
+<a class="l2" href="#sec-2-3" data-ch="ch2">2.3 基础设施管理</a>
+<a class="l3" href="#sec-2-3-1" data-ch="ch2">2.3.1 资源预置</a>
+<a class="l3" href="#sec-2-3-2" data-ch="ch2">2.3.2 配置与可观测性</a>
+<a class="l4" href="#sec-2-3-2-1" data-ch="ch2">2.3.2.1 配置管理</a>
+<a class="l4" href="#sec-2-3-2-2" data-ch="ch2">2.3.2.2 可观测性</a>
+<a class="l4" href="#sec-2-3-2-3" data-ch="ch2">2.3.2.3 追踪工具</a>
+<a class="l4" href="#sec-2-3-2-4" data-ch="ch2">2.3.2.4 性能工具</a>
+<a class="l3" href="#sec-2-3-3" data-ch="ch2">2.3.3 实践：DevOps 与 SRE</a>
+<a class="l2" href="#sec-2-4" data-ch="ch2">2.4 服务器级软件</a>
+<a class="l3" href="#sec-2-4-1" data-ch="ch2">2.4.1 操作系统与固件</a>
+<a class="l3" href="#sec-2-4-2" data-ch="ch2">2.4.2 容器化与虚拟化</a>
+<a class="l1" href="#ch3" data-ch="ch3">第 3 章 分布式系统基础设施：硬件</a>
+<a class="l2" href="#sec-3-1" data-ch="ch3">3.1 WSC 构建块与设计考量</a>
+<a class="l3" href="#sec-3-1-1" data-ch="ch3">3.1.1 整体架构</a>
+<a class="l3" href="#sec-3-1-2" data-ch="ch3">3.1.2 构建横向扩展系统</a>
+<a class="l4" href="#sec-3-1-2-1" data-ch="ch3">3.1.2.1 一个关于纵向扩展与横向扩展的模型</a>
+<a class="l4" href="#sec-3-1-2-2" data-ch="ch3">3.1.2.2 横向扩展的粒度：强壮核与孱弱核</a>
+<a class="l4" href="#sec-3-1-2-3" data-ch="ch3">3.1.2.3 加速器的纵向扩展对横向扩展</a>
+<a class="l2" href="#sec-3-2" data-ch="ch3">3.2 计算：服务器与机架</a>
+<a class="l3" href="#sec-3-2-1" data-ch="ch3">3.2.1 服务器硬件</a>
+<a class="l3" href="#sec-3-2-2" data-ch="ch3">3.2.2 硬件机架</a>
+<a class="l3" href="#sec-3-2-3" data-ch="ch3">3.2.3 把单台服务器看作分布式系统</a>
+<a class="l2" href="#sec-3-3" data-ch="ch3">3.3 加速器与定制硅片</a>
+<a class="l3" href="#sec-3-3-1" data-ch="ch3">3.3.1 专用化与摩尔定律的终结</a>
+<a class="l3" href="#sec-3-3-2" data-ch="ch3">3.3.2 ML 加速器与 TPU 系统</a>
+<a class="l4" href="#sec-3-3-2-1" data-ch="ch3">3.3.2.1 TPU</a>
+<a class="l4" href="#sec-3-3-2-2" data-ch="ch3">3.3.2.2 GPU</a>
+<a class="l3" href="#sec-3-3-3" data-ch="ch3">3.3.3 视频加速器与 VCU 系统</a>
+<a class="l2" href="#sec-3-4" data-ch="ch3">3.4 网络</a>
+<a class="l3" href="#sec-3-4-1" data-ch="ch3">3.4.1 从托盘到地球的完整网络</a>
+<a class="l3" href="#sec-3-4-2" data-ch="ch3">3.4.2 主机网络与智能网卡</a>
+<a class="l3" href="#sec-3-4-3" data-ch="ch3">3.4.3 集群网络</a>
+<a class="l3" href="#sec-3-4-4" data-ch="ch3">3.4.4 无骨干（Spine-less）网络</a>
+<a class="l3" href="#sec-3-4-5" data-ch="ch3">3.4.5 仓库规模数据中心里的光互联</a>
+<a class="l3" href="#sec-3-4-6" data-ch="ch3">3.4.6 专用网络</a>
+<a class="l3" href="#sec-3-4-7" data-ch="ch3">3.4.7 广域网（WAN）</a>
+<a class="l2" href="#sec-3-5" data-ch="ch3">3.5 存储</a>
+<a class="l3" href="#sec-3-5-1" data-ch="ch3">3.5.1 存储介质</a>
+<a class="l3" href="#sec-3-5-2" data-ch="ch3">3.5.2 无盘服务器</a>
+<a class="l3" href="#sec-3-5-3" data-ch="ch3">3.5.3 磁盘整机（Disk Appliance）</a>
+<a class="l3" href="#sec-3-5-4" data-ch="ch3">3.5.4 闪存整机（Flash Appliance）</a>
+<a class="l3" href="#sec-3-5-5" data-ch="ch3">3.5.5 智能存储</a>
+<a class="l1" href="#ch4" data-ch="ch4">第 4 章 数据中心基础设施：风火水电</a>
+<a class="l2" href="#sec-4-1" data-ch="ch4">4.1 数据中心基础设施基础</a>
+<a class="l3" href="#sec-4-1-1" data-ch="ch4">4.1.1 从地球到园区到楼宇</a>
+<a class="l3" href="#sec-4-1-2" data-ch="ch4">4.1.2 数据中心的基本结构</a>
+<a class="l3" href="#sec-4-1-3" data-ch="ch4">4.1.3 数据中心分级：Tier 体系</a>
+<a class="l3" href="#sec-4-1-4" data-ch="ch4">4.1.4 云与 AI 对数据中心设计的影响</a>
+<a class="l2" href="#sec-4-2" data-ch="ch4">4.2 数据中心供电系统</a>
+<a class="l3" href="#sec-4-2-1" data-ch="ch4">4.2.1 整体电力输送架构</a>
+<a class="l3" href="#sec-4-2-2" data-ch="ch4">4.2.2 交流与直流配电架构比较</a>
+<a class="l3" href="#sec-4-2-3" data-ch="ch4">4.2.3 不间断电源（UPS）</a>
+<a class="l3" href="#sec-4-2-4" data-ch="ch4">4.2.4 配电单元（PDU）</a>
+<a class="l3" href="#sec-4-2-5" data-ch="ch4">4.2.5 电力微电网与其它未来机会</a>
+<a class="l2" href="#sec-4-3" data-ch="ch4">4.3 数据中心制冷系统</a>
+<a class="l3" href="#sec-4-3-1" data-ch="ch4">4.3.1 整体制冷/机械架构</a>
+<a class="l3" href="#sec-4-3-2" data-ch="ch4">4.3.2 机房空调（CRAC）</a>
+<a class="l3" href="#sec-4-3-3" data-ch="ch4">4.3.3 冷水机组（Chiller）</a>
+<a class="l3" href="#sec-4-3-4" data-ch="ch4">4.3.4 自然冷却</a>
+<a class="l3" href="#sec-4-3-5" data-ch="ch4">4.3.5 冷却塔</a>
+<a class="l3" href="#sec-4-3-6" data-ch="ch4">4.3.6 气流设计考量</a>
+<a class="l3" href="#sec-4-3-7" data-ch="ch4">4.3.7 机架内、行内与液冷</a>
+<a class="l2" href="#sec-4-4" data-ch="ch4">4.4 数据中心其它设计考量</a>
+<a class="l3" href="#sec-4-4-1" data-ch="ch4">4.4.1 模块化数据中心设计：速度与效率</a>
+<a class="l3" href="#sec-4-4-2" data-ch="ch4">4.4.2 经济模型：五个信封</a>
+<a class="l3" href="#sec-4-4-3" data-ch="ch4">4.4.3 数据中心的物理自动化</a>
+<a class="l2" href="#sec-4-5" data-ch="ch4">4.5 历史回顾</a>
+</div>
+</nav>
 <header class="doctop">
 <h1>云计算与底座</h1>
 </header>
 
 <section>
-<div class="chapterhead"><h2 class="chtitle">第 1 章　引言</h2><div class="csub">Introduction</div></div>
+<div class="chapterhead"><h2 class="chtitle" id="ch1">第 1 章　引言</h2><div class="csub">Introduction</div></div>
 
-<h2 class="chead"><span class="no">1.1</span>背景铺垫</h2>
+<h2 class="chead" id="sec-1-1"><span class="no">1.1</span>背景铺垫</h2>
 
 <p>现代互联网诞生于 1983 年，然而这个里程碑式的时刻孕育出的技术，直到今天仍在持续改变着各行各业的产业与文化，而且丝毫没有放缓的迹象。移动设备与廉价高速连接的结合，加速了计算向服务端（也就是所谓「云端」）迁移的潮流，把移动设备有限的算力与存储容量扩充了开来。<b>这场迁移从 25 年前面向消费者的服务起步，如今连主流的传统企业负载也已全面拥抱。</b>2024 年，AWS、Azure 与 GCP 三家的云计算收入合计超过了 2000 亿美元。</p>
 <p class="upd"><b>【2026 年更新】</b>到 2026 年第三季度，全球云基础设施服务（IaaS、PaaS 与托管私有云）单季支出已达 1677 亿美元，同比增长 55%，滚动十二个月收入约 5580 亿美元。其中 AWS 单季收入 460 亿美元（年化约 1840 亿美元），Azure 约 332 亿美元，Google Cloud 307 亿美元；三家合计单季约 1100 亿美元，已是 2024 年三家全年合计的两倍以上。生成式 AI 相关服务约占市场总额的三分之一。<span class="usrc">来源：Synergy Research Group（2026 年第三季度云市场报告）</span></p>
@@ -100,7 +248,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>运行这样大规模服务所需的计算平台，与过去几十年流行的「披萨盒」式服务器或冰箱那么大的高端多处理器机，看上去简直毫无相似之处。这种平台的硬件由成千上万台独立的计算节点构成，配上相应的网络与存储子系统、输配电与电源调理设备，以及大规模的散热系统。容纳这些系统的「机箱」，其实是一栋建筑，而且常常和大型仓库难以分辨。并且，正如前面暗示的，WSC 本质上不同的架构，为系统开发、运维与安全带来了好得多的路径。</p>
 
-<h2 class="chead"><span class="no">1.2</span>仓库规模计算机（WSC）</h2>
+<h2 class="chead" id="sec-1-2"><span class="no">1.2</span>仓库规模计算机（WSC）</h2>
 
 <p>如果「规模大」是这类系统的唯一特点，那我们直接叫它「数据中心」就行。<b>数据中心（data center）是把多台服务器和通信设备放在一起以便运维的建筑。</b>在这个意义上，WSC 不过是一个大型数据中心。不过，传统数据中心通常托管着大量中小型公司，各家跑在各家专用的硬件上，彼此解耦、相互保护；同一座数据中心里的不同计算系统，在硬件、软件或维护基础设施上往往没有多少共同点，而且通常完全互不通信。</p>
 
@@ -116,7 +264,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>在这本书里，我们讨论 WSC 时就好像它是一个数据中心，尽管许多互联网服务实际用到的是相距遥远的多座数据中心。有时，多座数据中心作为同一服务的完整副本存在，复制主要用来降低用户时延、提高服务吞吐；在这种情况下，某一次用户请求全部在一座数据中心内处理完毕，我们把每座数据中心看作一台机器是合适的。另一些情况下，服务被「分片」（shard）到多个 WSC 上，一部分用户由这个位置服务，另一部分由那个位置服务。最后，还有一类服务（尤其是存储、数据库与分析类负载）会透明地在多个 WSC 之间复制，以获得更高的可用性与持久性。</p>
 
-<h2 class="chead"><span class="no">1.3</span>区域与可用区</h2>
+<h2 class="chead" id="sec-1-3"><span class="no">1.3</span>区域与可用区</h2>
 
 <p>从最高层看，WSC 被放置在一些地理区域（region）内，每个区域的直径大约 50 公里。区域由多个园区（campus）组成，任意两个园区相距不超过 50 公里。<b>这个最大距离不是随手定的</b>：它大到足以让单一灾难事件（比如洪水、火灾或地震），或由故障、操作失误引起的停机，不太可能同时波及多个园区；同时又小到允许园区之间建立直达光路而不需要沿途中继器，由此形成的链路的往返时延足够低，足以支持园区之间的同步存储复制。</p>
 
@@ -134,7 +282,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>虽然区域能提供很高程度的物理可用性（毕竟相距 50 公里的三个园区不太可能被同一场灾难同时击中），但它们未必能在 API 层也提供这种程度的可用性，因为区域的控制面在所有可用区之间是共享的。举例说，如果区域负载均衡器出了 bug，那么所有可用区里的应用都会受影响。正因如此，许多 API 同时提供可用区级与区域级两种变体（它们的唯一区别就是故障域），让客户自己选合适的那种。选区域版更省事，但增加了一层对区域云 API 的依赖，也就要求你更信任云提供商的 SLO（服务等级目标）表现。选可用区版则能让你对应用的区域级可靠性属性多一层内部掌控，但需要你自己多付出一份精力去复刻区域级功能。</p>
 
-<h2 class="chead"><span class="no">1.4</span>建筑与基础设施</h2>
+<h2 class="chead" id="sec-1-4"><span class="no">1.4</span>建筑与基础设施</h2>
 
 <p>一个园区由一座或多座数据中心建筑组成。有时候，一栋建筑里包含多个 WSC，各自的供电、制冷、网络基础设施大体独立，彼此用能撑数小时的防火墙隔开，这样即使其中一个段落着火，相邻段落仍能继续运行。例如，图 1.2 爱荷华州 Council Bluffs 园区鸟瞰图里最上面的那栋建筑，就由三个独立的 WSC 组成（它们看起来不完全一样，是因为最初设计的左侧那个 WSC 与后来两个之间引入了设计变更）。图 1.3 展示了一座服务器大厅的内部，图 1.4 展示了一座制冷大厅的一部分。</p>
 
@@ -166,7 +314,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>建筑设计没法与服务器设计完全脱钩。比如，<b>建筑的功率密度决定了在一根短距光缆半径内能放多少台服务器</b>，从而影响密集互连服务器（或加速器）集群的最大规模，或者建一个更大集群、用更贵光学器件的成本。同样地，制冷怎么送到机架，会影响给加速器上液冷的难易。因此，不理解服务器，就很难判断什么才是「最好」的数据中心设计，反之亦然；有时候，数据中心层面多花一点点成本，能在机架或服务器层面省下更多钱。最后同样重要的是，数据中心的寿命超过 20 年，所以它应当「最好」的不仅是当前这一代服务器，还包括十年后才会出现的服务器。</p>
 
-<h3>1.4.1　服务器</h3>
+<h3 id="sec-1-4-1">1.4.1　服务器</h3>
 
 <p>数据中心里消耗的能源通常大部分落到服务器上，而服务器正是 WSC 的硬件构建块。这些商品化服务器装进机架，用本地「架顶」以太网交换机互连。这些机架级交换机（截至 2025 年用的是 100 至 200 Gbps 链路），再上行连接到一台或多台集群级（或数据中心级）以太网交换机。</p>
 <p class="upd"><b>【2026 年更新】</b>2025 年起 800 Gbps 链路已进入规模部署，1.6 Tbps 链路（200 Gbps 每通道 SerDes）开始落地。博通于 2025 年 6 月发布业界首颗 102.4 Tbps 单芯片以太网交换芯片 Tomahawk 6，可支持 64 个 1.6 Tbps 端口或 128 个 800 Gbps 端口，机架级交换机随之迈向每服务器 800 Gbps 至 1.6 Tbps。<span class="usrc">来源：博通官方发布（2025 年 6 月）</span></p>
@@ -182,7 +330,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 <span class="cap">图 1.6　WSC 的构建块：服务器托盘、TPU 板与磁盘托盘（DaaC Fig. 2.6）</span>
 </fig>
 
-<h3>1.4.2　存储</h3>
+<h3 id="sec-1-4-2">1.4.2　存储</h3>
 
 <p>磁盘与闪存（NAND）SSD 是当今 WSC 存储系统的构建块。服务器通常在 WSC 里耗用大部分电力，而<b>存储则通常占据大部分空间</b>，因为装满磁盘的机架耗电少得多，所以一兆瓦磁盘占的地板面积远大于一兆瓦服务器。虽然磁盘对许多用例来说太慢，但凭借冷数据上无可匹敌的字节成本，它们仍然是存储设备里的多数。</p>
 
@@ -197,14 +345,14 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>过去二十年里，网络速度的提升远比磁盘速度快得多，因此支持网络附加的磁盘存储很容易，管理大大简化，也不用再考虑数据局部性。另一方面，闪存 SSD、以及新兴的非易失性内存（NVM）这类低时延高带宽存储，给 WSC 网络带来了新挑战：正像二十年前一块磁盘可能吃光服务器网络链路的可观一部分，今天一块 NVMe SSD 可能吃掉一条 100 Gbps 以太网链路的 25% 至 50%。第 3 章会更详细地讨论系统平衡。</p>
 
-<h3>1.4.3　网络结构</h3>
+<h3 id="sec-1-4-3">1.4.3　网络结构</h3>
 
 <p>为 WSC 选择网络结构，是在速度、规模与成本之间权衡。截至 2025 年，交换机给出的总带宽为 25 至 50 Tbps，支持单个机架内 64 台服务器各用 400 Gbps。这样一来，机架内服务器之间的带宽通常是同构且充沛的。然而，要把 WSC 里所有其它服务器都按这个速度连起来，会非常昂贵，没有哪台单交换机做得到。<b>因此 WSC 用一层层聚合交换机把多个机架绑成一个互连的机架块，再用一层把这样的大块绑成更大的块，依次类推。</b>如果所有服务器同时通信（对分带宽），那么离得越远的服务器，到它的平均带宽就越慢。所以虽然同机架内的服务器之间可能有 400 Gbps，到相邻机架的带宽可能只有 100 Gbps，到横跨整个 WSC 尽头的服务器可能只剩 50 Gbps。我们会在 3.4　节详细讨论这类网络。</p>
 <p class="upd"><b>【2026 年更新】</b>2025 年博通 Tomahawk 6 出货后，单颗商用交换芯片的总带宽已翻倍至 102.4 Tbps：单台交换机即可按每服务器 1.6 Tbps 全带宽互连一个机架，两层网络可按每链路 200 Gbps 互连超过 10 万颗加速器。<span class="usrc">来源：博通官方发布（2025 年 6 月）</span></p>
 
 <p>另一种做法是，通过花更多钱在互连结构上来改善集群级网络的瓶颈。比如 Infiniband 互连可以扩展到几千个端口，带宽高、时延低，但每端口的成本明显高于以太网。究竟在网络上多花钱，还是多买服务器或存储，是个因应用而异的取舍，没有放之四海而皆准的答案。不过，作为一条经验法则，我们默认<b>机架内连接比机架间连接便宜</b>。</p>
 
-<h3>1.4.4　能耗</h3>
+<h3 id="sec-1-4-4">1.4.4　能耗</h3>
 
 <p>能耗是 WSC 设计中的重要关切，因为能源相关成本占了总拥有成本的显著一部分。图 1.8 通过按组件分类拆解一台 2024 代服务器的峰值功耗，让人直观看到现代 IT 设备里的能量去向。这台服务器是双插槽 x86 服务器，配 768 GB DRAM 与本地 SSD 存储，运行在 80% 的利用率上。</p>
 
@@ -215,13 +363,13 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 <span class="cap">图 1.8　2024 年一台 Google 服务器的功耗构成（DaaC Fig. 2.8）</span>
 </fig>
 
-<h3>1.4.5　故障与维修的应对</h3>
+<h3 id="sec-1-4-5">1.4.5　故障与维修的应对</h3>
 
 <p>WSC 的庞大规模，要求互联网服务的软件能够容忍相当高的组件故障率。例如，<b>磁盘驱动器的年化故障率可高达 4%</b> [5] [6]；不同部署报告的平均服务器级重启次数在每年 1.2 至 16 次之间。面对如此高的组件故障率，一个跑在数千台机器上的应用，可能要按小时频度响应故障状况。第 1 章描述应用环境，本节会展开这个话题。</p>
 
-<h2 class="chead"><span class="no">1.5</span>负载</h2>
+<h2 class="chead" id="sec-1-5"><span class="no">1.5</span>负载</h2>
 
-<h3>WSC 系统栈</h3>
+<h3 id="sec-c1-s5-h1">WSC 系统栈</h3>
 
 <p>一个典型的 WSC 部署包含多层软件栈，从高层的工作负载与应用框架，到集群级与监控软件，再到开发与平台软件。跑在仓库规模计算机上的应用与软件，主导着许多系统设计中的权衡决策。本章与下一章里，我们梳理大型互联网服务中运行软件的一些鲜明特征，以及一个完整计算平台所需的系统软件与工具。</p>
 
@@ -254,7 +402,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p><b>软件即服务（SaaS）</b>交付全托管的应用，把与应用相关的大部分甚至全部运维任务（比如安装、置备、升级等等）都从客户那里接走。互联网消费类服务一直就是 SaaS 服务，所以这个词主要用于描述企业软件。例如 Google Workspace [17] 就是一个 SaaS 应用。</p>
 
-<h3>计算消费模型</h3>
+<h3 id="sec-c1-s5-h2">计算消费模型</h3>
 
 <p>WSC 里的负载既可以在共享（多租户）硬件上运行，也可以在专用硬件上运行。它们既可以是特定应用（Gmail、YouTube、搜索等），也可以是更广义的应用框架或平台（GCE、Spanner、BigTable、Vertex AI 等）。此外，它们既可以是内部的传统超大规模负载，也可以是对外服务云客户的负载。在云内部，客户负载可以跑在基础设施即服务（IaaS）平台上，比如 Google Compute Engine（GCE）或 Google Kubernetes Engine（GKE），或者服务更高级别的托管服务（例如 Vertex AI、DataFlow、DataProc、MemoryStore、Cloud SQL 等）。此外，像 TPU pod（第 3 章讨论）这样的加速器平台可以运行特定的机器学习负载与框架，而磁盘与闪存存储设备可以运行更专门化的存储负载。</p>
 
@@ -274,7 +422,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>公有云目前并不提供这样的层级，例外是大多数公有云为虚拟机提供尽力而为形态，也就是抢占式虚拟机（preemptible VM）或 Spot 虚拟机。<b>用层级来管理容量能带来可观的节省，但也会显著增加复杂性</b>，因此它最适合云提供商而非云消费者。</p>
 
-<h3>公有云与超大规模</h3>
+<h3 id="sec-c1-s5-h3">公有云与超大规模</h3>
 
 <p>虽然 WSC 最初是为 Google 搜索、Facebook 或 YouTube 这类在线数据密集的 Web 负载设计的，如今它们也成为 Amazon、Google 与 Microsoft 等公有云的基石。今天，<b>公有云已经成了 WSC 里最大的负载，专门拨给公有云的数据中心总容量，远大于私有超大规模云的用量</b>。事实上，除了 Google 与 Meta 的服务之外，如今几乎所有最流行的消费类应用都跑在公有云上。</p>
 
@@ -282,9 +430,9 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>乍一看，公有云计算与超大规模应用似乎非常不同：后者一个应用可能跑在几万台服务器上，而跑在公有云上的多数企业应用只用几台服务器。不过，从 WSC 技术栈的许多层面看，公有云就像一个消耗几万台服务器的大型应用。例如，对 Google 的基础设施而言，GCE（提供虚拟机的 GCP 服务）看起来就像一个单一的大型应用。Google 的独特之处在于同时拥有超大规模消费应用和大型公有云，本章我们会说明，同一套基础设施如何既能支撑大型在线内部服务，又能支撑大型公有云产品。</p>
 
-<h3>1.5.1　通算负载</h3>
+<h3 id="sec-1-5-1">1.5.1　通算负载</h3>
 
-<h4>1.5.1.1　大致概览</h4>
+<h4 id="sec-1-5-1-1">1.5.1.1　大致概览</h4>
 
 <p>网页搜索是最早获得广泛流行的一类大型互联网服务。90 年代中期，Web 内容量爆炸式增长，组织海量信息需要当时还不存在的新基础设施。搜索成了典型的大规模处理难题：你如何构建一个服务，能随着 Web 增长（因为所有网页都需要被索引）与互联网用户增长而扩展？</p>
 
@@ -299,7 +447,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>接下来的小节里，我们描述用于网页搜索、视频服务、机器学习、Gmail、数据处理与云负载的例子。我们不详细描述这些互联网服务负载的实现，尤其是因为这个市场的动态本质会让这些细节在出版时就已经过时。不过，从高层描述几个负载仍然有价值，可以借此阐明 WSC 负载的关键特征，点出在线服务与批处理（离线）处理系统这几个重要门类之间的区别。这些讨论为后面的架构设计权衡铺路。</p>
 
-<h4>1.5.1.2　案例研究：搜索</h4>
+<h4 id="sec-1-5-1-2">1.5.1.2　案例研究：搜索</h4>
 
 <p>搜索是典型的「大海捞针」问题。虽然很难在任何时点精确测定 Web 的大小，但可以稳妥地说，它由数以万亿计的独立文档组成，而且还在持续增长。如果我们假设 Web 含有 1000 亿份文档、每份文档平均文本大小（压缩后）10 KB，那么这片「大海」约有 1000 TB。（实际上索引大得多；Google 公开声称它覆盖数千亿个网页、规模远超 10 万 TB [19]。）网页搜索的数据库，就是对这个语料库做倒排、以图 1.11 所示的逻辑格式建出来的索引。</p>
 
@@ -329,7 +477,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>全局负载均衡有助于容量规划。图 1.12 展示的是美国一个典型集群的交互式搜索流量，该集群收到的流量与北美用户需求成正比。14:00 PST（即 17:00 EDT）的小低谷，是通勤时段搜索变少；凌晨 2 点的大低谷，是北美大部分（并非全部）用户睡着了。高峰时段流量会有波动，因为负载均衡器会根据时延在不同数据中心之间微调流量分配。</p>
 
-<h4>1.5.1.3　案例研究：YouTube</h4>
+<h4 id="sec-1-5-1-3">1.5.1.3　案例研究：YouTube</h4>
 
 <p>IP 视频流量占全球互联网流量的 75% 至 85%。在 YouTube 上，用户每分钟上传数百小时的视频，每天观看数十亿小时。视频转码（把一种格式的视频解码、再编码成另一种格式）是任何视频分享基础设施的关键环节：视频上传时的格式、编解码器、分辨率、帧率、色彩空间等组合五花八门，需要把这些视频转换成客户端设备能播放的子集编解码器、分辨率与格式，并适配可用的网络带宽，以优化用户体验。</p>
 
@@ -344,7 +492,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>视频片段在数据中心转码成可播放格式后，会通过边缘网络（Edge）分发；边缘网络缓存最近观看过的视频，以降低时延并放大出口带宽。用户请求一个边缘缓存里没有的视频时，请求被转发给最近的数据中心或对等边缘节点，所需视频从目录上传。</p>
 
-<h4>1.5.1.4　案例研究：Gmail</h4>
+<h4 id="sec-1-5-1-4">1.5.1.4　案例研究：Gmail</h4>
 
 <p>Gmail 是一个大型邮件服务：拥有数十亿活跃账户，Gmail 里的邮件数量与网页数量同一量级。Gmail 的功能既有明摆着的（收发邮件），也有很多其它功能，比如抵御垃圾邮件、钓鱼与恶意软件，自动分拣归类邮件，对邮件做快速搜索，以及帮用户撰写和回复邮件的 AI 工具。Gmail 无法从一个数据中心以这样的规模提供低时延、可靠的邮件服务；因此，<b>Gmail 是一个全球分布的分布式系统。</b></p>
 
@@ -366,7 +514,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>总而言之，Gmail 是一个为可用性（通过地理上多样化地复制）、时延（比如避免数据中心热点、或针对每种数据用优化的存储系统）与成本（比如利用一致性哈希）而优化的分布式系统。</p>
 
-<h3>1.5.2　AI 负载</h3>
+<h3 id="sec-1-5-2">1.5.2　AI 负载</h3>
 
 <p>到目前为止，我们讨论的都是搜索、Gmail 这类具体服务。接下来我们讨论 AI/ML（人工智能/机器学习）这个负载门类。</p>
 
@@ -383,11 +531,11 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>开发与部署 DNN 涉及几个不同阶段，各自有着独特的计算需求。训练（预训练）阶段从（带标签的）数据中学习模型权重；随后（可选地）针对任务特定数据做进一步的微调与蒸馏；最后是推理（也就是服务模型），对新数据做预测。（近来的「思考型」模型又引入了额外的推理期计算。）</p>
 
-<h4>1.5.2.1　训练</h4>
+<h4 id="sec-1-5-2-1">1.5.2.1　训练</h4>
 
 <p>训练是 DNN 开发的根基，它用带标签的数据迭代调整模型参数，常常以数千个专门化加速器（TPU、GPU）的规模、持续数周地进行。这个计算密集的过程利用分布式学习技术：多个学习节点处理数据子集，再通过中心化服务器或集合通信（collective reduction）对参数达成一致。DNN 训练算法通常以高度同步的方式运转，要求工作节点之间频繁通信，以保证参数更新一致、模型收敛。<b>这种同步性需要精心优化以避免通信瓶颈</b>，哪怕只有一个掉队者也能让整个训练停摆。此外，大规模下它还要求健壮的容错机制，包括周期性模型检查点、无性能降级的快速恢复，以及能无缝处理故障的编程抽象。这种大规模负载的同步性，还需要新的设计优化来应对功率与热量的尖峰。最后，高效的数据处理流水线对于处理大规模数据集、以高性能方式预处理、并把数据高效喂给专门化加速器，都至关重要。</p>
 
-<h4>1.5.2.2　推理</h4>
+<h4 id="sec-1-5-2-2">1.5.2.2　推理</h4>
 
 <p>推理（也就是服务）是把训练好的模型用起来，对新数据做预测，面向用户的应用往往有严格的时延要求。大规模服务要求能部署到多样的硬件与软件环境、能缩放到每秒处理数百万查询、并保持高可用与容错。高效的资源利用与负载均衡，对达到性能与性价比目标至关重要。图 1.15 展示了模型开发期间的主要负载：预训练摄入海量训练数据来确定基础模型的权重；监督微调（SFT）与基于人类反馈的强化学习（RLHF）把模型调整到特定用例（比如聊天机器人）；蒸馏则缩小模型体积以优化性能。</p>
 
@@ -396,11 +544,11 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 <span class="cap">图 1.15　DNN 模型的开发与部署阶段（DaaC Fig. 3.7）</span>
 </fig>
 
-<h4>1.5.2.3　大语言模型</h4>
+<h4 id="sec-1-5-2-3">1.5.2.3　大语言模型</h4>
 
 <p>大语言模型（LLM）给这条工作流增加了额外阶段：在大型通用数据集上长时间预训练，需要海量算力；针对特定任务的微调用较小的数据集、较少的算力；可选的蒸馏则造出更小、更省资源的模型用于服务。LLM 预训练需要数万到数十万颗芯片，有时横跨多个数据中心。LLM 微调同样需要相当可观的算力，不过可以在更局部的加速器集群上完成。LLM 服务有其独特的挑战：LLM 巨大的内存足迹必须分布到多台主机 CPU 与加速器（TPU、GPU）上；推理涵盖从高度计算密集到高度内存带宽密集的不同阶段。此外，大规模服务 LLM 要求高效的上下文与状态管理、低时延响应，同时还要有成本效益。幸运的是，推理效率在过去几年里进展极佳，在同样或更好的质量下带来了超过两个数量级的改善。</p>
 
-<h4>1.5.2.4　AI 计算的特征</h4>
+<h4 id="sec-1-5-2-4">1.5.2.4　AI 计算的特征</h4>
 
 <p>大规模线性代数运算，尤其是矩阵乘法，主导着 DNN 负载。图 1.16 绘制了训练当前最先进模型所需的 FLOPS 随时间的变化，从早期 DNN（ResNet）一直到近期的 LLM（Google Gemini [25]、OpenAI GPT-4 [26] [27]、Meta Llama [28]、Anthropic Claude [29]）。这个基本属性推动了 TPU、GPU 等专门化硬件加速器的发展，它们针对高效执行这些运算做了优化。与使用高位宽数值（fp64、fp32）的传统与 HPC 负载不同，DNN 模型可以采用较低精度的数值格式（bf16、fp8、fp4、ocp-mx）。这些低精度格式减小了内存足迹，让 FLOPS 的供给更高效，在加速器上提升了面积与能耗效率。</p>
 
@@ -420,9 +568,9 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 </section>
 
 <section>
-<div class="chapterhead"><h2 class="chtitle">第 2 章　分布式系统基础设施：软件</h2><div class="csub">WSC Software: Distributed Systems Infrastructure</div></div>
+<div class="chapterhead"><h2 class="chtitle" id="ch2">第 2 章　分布式系统基础设施：软件</h2><div class="csub">WSC Software: Distributed Systems Infrastructure</div></div>
 
-<h2 class="chead"><span class="no">2.1</span>软件栈总览</h2>
+<h2 class="chead" id="sec-2-1"><span class="no">2.1</span>软件栈总览</h2>
 
 <p>上一章，我们把目光放在运行在仓库规模计算机（WSC）上的应用，以及它们如何影响系统权衡与设计决策。这一章，我们把注意力转向软件栈里更靠下的部分。图 2.1 快速回顾了软件栈的各个层次：最上层是应用与框架，往下依次是集群级系统软件、平台软件与硬件。全章要回答的核心问题是：一个把几万台服务器凝聚成一台「机器」的分布式系统软件层，应该如何设计。</p>
 
@@ -431,17 +579,17 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 <span class="cap">图 2.1　Google 仓库规模计算机软件栈（DaaC Fig. 4.1）</span>
 </fig>
 
-<h2 class="chead"><span class="no">2.2</span>分布式系统</h2>
+<h2 class="chead" id="sec-2-2"><span class="no">2.2</span>分布式系统</h2>
 
 <p>在单台系统里，操作系统层负责管理资源、向这台计算机提供基础服务。与此类似，一个由数千台计算机、网络与存储组成的 WSC，也需要一套在更大尺度上提供类似功能的软件。本节讨论这套软件里最重要的三个组成部分：集群级系统、存储，以及广域网（WAN）与边缘网络。</p>
 
-<h3>2.2.1　集群级基础设施</h3>
+<h3 id="sec-2-2-1">2.2.1　集群级基础设施</h3>
 
 <p>许多 WSC 被接入一张全球网络、提供全球范围的服务。集群（cluster）是作为单元被管理的最小管理域。一个集群（有时也叫 cell）由接入同一张高带宽集群网络（比如 Jupiter，见第 3 章）的机器组成。通常，一个集群里有数万台服务器，位于同一数据中心机房或楼内（即 10 至 30 兆瓦的功率规模）。集群里所有服务器都连到同一张网络、由同一套控制面管理，因此它们存在同时全部不可用的可能。</p>
 
 <p>集群比区域（zone，见第 1 章）更低一层，因为一个区域可以包含分布在不同楼宇里的多个集群。例如，一个新区域可以只从一个集群起步，随着时间推移再不断添加集群。</p>
 
-<h4>2.2.1.1　资源管理</h4>
+<h4 id="sec-2-2-1-1">2.2.1.1　资源管理</h4>
 
 <p>资源管理也许是集群级基础设施层里最不可或缺的组件。它控制着用户与作业到硬件资源的映射，强制执行优先级与配额，并提供基本的任务管理服务。资源管理承担四项明确的职责：</p>
 
@@ -465,13 +613,13 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>如今的资源管理器还纳入了功率、能源与碳优化。例如，它们允许对电力基础设施进行超额认购，在需要时对低优先级负载进行限电（capping）[5]；跨区域的调度器还可以把负载迁移到碳排放最低的区域 [6]。</p>
 
-<h4>2.2.1.2　基础基础设施软件</h4>
+<h4 id="sec-2-2-1-2">2.2.1.2　基础基础设施软件</h4>
 
 <p>几乎每个大规模分布式应用都需要一小撮基本功能：可靠的分布式存储、远程过程调用（RPC），以及集群级同步与加锁。在大集群里，要把这类功能以高性能、高可用的方式正确实现相当复杂。与其为每个应用反复实现这种棘手的代码，不如把它们做成可复用的模块或服务。Colossus（GFS 的继任者）[7] [8]、Dynamo [9] 与 Chubby [10] 就是大集群里可靠存储与锁服务的典型例子。</p>
 
 <p>许多在小规模部署里只是简单手工流程的任务，到了大规模系统里都需要可观的基础设施：软件镜像分发与配置管理、监控、紧急情况下的告警分诊，等等。Autopilot [11] 为 Windows Live 数据中心给出了这类功能的一种设计。监控整个硬件机队的健康状况，同样需要细致的监控、自动诊断与维修流程的自动化。Google 的 System Health Infrastructure [12] 是高效健康管理所需软件基础设施的一个例子。最后，这种规模下的性能调试与优化也需要专门方案：Dapper [13] 是最早真实部署的系统之一，通过收集 RPC 追踪数据来调试性能问题，并启发了今天的 OpenTelemetry 生态 [14]。</p>
 
-<h3>2.2.2　非结构化存储系统</h3>
+<h3 id="sec-2-2-2">2.2.2　非结构化存储系统</h3>
 
 <p>Google 的 GFS [7] 是第一个提供简单类文件抽象的集群级存储系统。最初，GFS 是为支持单一用途而设计的：网页搜索的索引系统（把抓取的网页转成搜索可用的索引文件的系统）。因此它专注于为数千个并发读者/写者提供高吞吐，并在高磁盘故障率下保持稳健性能。GFS 的用户通常处理海量数据，所以 GFS 又进一步针对大块读写做了优化。</p>
 
@@ -498,7 +646,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>把大量功能放进 Colossus 客户端有一个明显的缺点：要修 bug 或提供新功能，所有 Colossus 客户端都得重新编译、然后重启！这是非常不受欢迎的性质，因为通常无法控制使用某文件系统的应用的升级节奏。不过，对单家公司（即云提供商 Google）内部使用而言，这是一个务实的选择：Google 有一条标准政策，要求所有二进制程序定期重建，这一政策顺带也让 Colossus 客户端保持更新。相反，Colossus 的公有「亲戚」GCS [18] 做了相反的选择，因为它不可能强迫云客户及时升级应用。因此，GCS 的客户端库相当简单，只负责把请求转发给一个装着真正 Colossus 客户端的 API 服务器。</p>
 
-<h3>2.2.3　结构化 WSC 存储</h3>
+<h3 id="sec-2-2-3">2.2.3　结构化 WSC 存储</h3>
 
 <p>Colossus 与 GCS 的简单文件抽象，对处理大块数据的系统也许够用，但应用开发者还需要类似数据库的功能：数据集可以被结构化、建立索引，以支持方便的小更新或复杂查询。结构化分布式存储系统，例如 Google 的 Bigtable [19] 与 Amazon 的 DynamoDB [9]，就是为了满足这些需求而设计的。与传统数据库系统相比，Bigtable 与 DynamoDB 牺牲了一些特性，比如丰富的模式（schema）表示与强一致性，以换取超大规模下的更高性能与可用性。例如，Bigtable 提供了一个简单的多维有序映射：行键（字符串）关联多个按列组织的取值，构成一张分布式稀疏表。列值关联时间戳，以支持版本管理与时间序列。即使与性能最高的传统 SQL 数据库相比，Bigtable 也能达到高出好几个数量级的吞吐（每秒数十亿次查询）。</p>
 
@@ -514,7 +662,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>在结构化存储光谱的另一端，是几乎只追求高性能的系统。这类系统往往不支持事务、不做地理复制，采用简单的键值（key-value）数据模型，持久性保证也可能很宽松。Memcached [26] 最早是作为一张基于分布式 DRAM 的对象缓存层开发的，如今被广泛用于简单缓存。当快速键值存储的价值变得清晰后，它在学术界引起了相当大的兴趣。例如，斯坦福的 RAMCloud [27] 使用分布式 DRAM 数据存储，但目标是在存储节点故障下获得高得多的单节点性能与持久性。FAWN-KV [28] 也展示了一个高性能键值存储系统，但它改用 NAND 闪存作为存储介质，并额外强调能效。今天，包括 Redis [29] 在内的几个开源键值存储系统都很流行。</p>
 
-<h3>2.2.4　WAN 与边缘网络</h3>
+<h3 id="sec-2-2-4">2.2.4　WAN 与边缘网络</h3>
 
 <p>本书主要把 WSC 当作大型建筑块来讨论，但大多数 WSC 其实是一家超大规模运营商（hyperscaler）或公有云提供商运营的全球基础设施的一部分。这里我们勾勒一下 WSC 之外的这部分基础设施；它虽然小得多，但对 WSC 自身的价值有着不成比例的巨大影响。</p>
 
@@ -555,11 +703,11 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>回到我们的例子：用户发给 Google 的数据包，会先经其 ISP 的网络到达一个 Google 边缘位置，那里有一台对等路由器把 ISP 与 Google 连起来。如果本地处理不了，它随后穿过 Google 的城域网到达一个骨干网关，再到服务该请求的数据中心附近的另一个骨干网关。在那里，它沿目的地城域网到达一个园区网网关，再进入托管该服务的楼宇，楼里的网关再把它路由到放着真正服务器的集群网络。</p>
 
-<h2 class="chead"><span class="no">2.3</span>基础设施管理</h2>
+<h2 class="chead" id="sec-2-3"><span class="no">2.3</span>基础设施管理</h2>
 
 <p>一个 WSC 集群包含数百万个物理部件、数千万个计算核心，以及至少数万个二进制程序。在这种规模下管理资源，本身就是一门艺术。今天，许多能减轻小规模部署运维负担的做法，其实都源自当初为 WSC 开发的方法。</p>
 
-<h3>2.3.1　资源预置</h3>
+<h3 id="sec-2-3-1">2.3.1　资源预置</h3>
 
 <p>使用公有云背后 WSC 的大多数开发者，从不需要接触他们所用虚拟机、容器或存储之下的物理基础设施。预置一项新资源只需一次 API 调用，几秒钟后资源就可用。在这层「容量随时可用」的假象背后，是物理世界的现实。我们如何保证，每当客户请求容量时，空闲资源都恰好可用？</p>
 
@@ -574,11 +722,11 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>在 WSC 里，供给不一定只来自新采购。例如，也许一个大用户刚刚搬出了同一座（或附近某座）数据中心，它的机器可以用来满足新需求。又或者，位置 A 的某个服务可以迁到有闲置资源的位置 B，从而为 A 的新需求腾出资源。再或者，需求本身可以被重塑：一个请求 100 块 A 型 GPU 的作业，换成 150 块 B 型 GPU 也能跑得一样好，从而避免再买一批 A 型 GPU。一般而言，容量可以在越大的池子里共享、需求的硬件与位置越灵活，履单的总成本就越低。由于「好的履单」与「出色的履单」之间的成本差异可能很大，规划与履单已经演变成高度复杂的、多维的优化问题。或者，正如有人所说：「规划与履单看似简单，真要自己做起来才发现不简单。」</p>
 
-<h3>2.3.2　配置与可观测性</h3>
+<h3 id="sec-2-3-2">2.3.2　配置与可观测性</h3>
 
 <p>负载与硬件基础设施的规模与复杂度，让管理与可观测性框架成为任何 WSC 部署的基础组件，因此我们在这里详细讲讲。</p>
 
-<h4>2.3.2.1　配置管理</h4>
+<h4 id="sec-2-3-2-1">2.3.2.1　配置管理</h4>
 
 <p>历史上，应用配置更像是事后补充，而不是一门正经学问。二进制程序通过命令行参数、shell 环境变量以及少量配置文件来接收配置。现代软件开发改变了这一点，配置管理已经成为软件工程不可分割的一部分 [34]。</p>
 
@@ -586,7 +734,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>配置管理的目的，是把所有这些数据存进一个版本控制的系统里，支持变更评审、坏配置回滚与历史记录（「我们去年的设置是什么？」）。这类系统常常构建在源代码控制系统之上，因为它们本来就是为十分相似的目的而造的。这就是为什么这种做法常被叫作「配置即代码」（configuration as code）：把配置文件当成源文件来对待。「基础设施即代码」（Infrastructure as Code，IaC）更进一步，主张服务实例的搭建与拆除都应完全自动化。它需要配置即代码，还要再加上创建虚拟机或容器镜像、启动相应的虚拟机和容器、配置它们的网络与存储等所有步骤。IaC 工具的典型例子包括 Ansible [35]、Chef [36]、Puppet [37] 与 Terraform [38]。</p>
 
-<h4>2.3.2.2　可观测性</h4>
+<h4 id="sec-2-3-2-2">2.3.2.2　可观测性</h4>
 
 <p>监控（monitoring）是收集并汇报那些定义系统健康的指标；而可观测性（observability）更进一步，要求有系统能从监控数据中找出问题的根因。监控针对单个组件采集数据，可观测性则把分布式系统当作一个整体来看。</p>
 
@@ -598,7 +746,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>WSC 开发者还需要应用日志与崩溃日志来定位问题来源。在传统（单机）应用里，这些日志存在本地文件系统中；而在 WSC 里，它们需要被收集、汇聚到一个中央仓库，这样开发者才能查看该服务所有实例的应用日志。通常，这些文件先写到本地存储，然后由一个日志收集进程复制到中央仓库，在那里保留一段时间。这一过程往往还会压缩日志并做「脱敏」（sanitize），去除崩溃转储里可能出现的加密密钥等敏感数据。</p>
 
-<h4>2.3.2.3　追踪工具</h4>
+<h4 id="sec-2-3-2-3">2.3.2.3　追踪工具</h4>
 
 <p>虽然服务级仪表盘能帮运维者快速识别服务级问题，但它们通常缺少回答「服务为什么慢、为什么达不到要求」所需的详细信息。运维者与服务设计者都需要工具，来理解大量程序（可能跑在数百台服务器上）之间复杂的相互作用，从而确定性能异常的根因、识别瓶颈。</p>
 
@@ -610,7 +758,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>目前为止，我们讨论的是 RPC 层面的追踪，但这个概念也可以用于函数调用。例如，X-Ray 是 LLVM 编译器的一个特性，它用编译器插桩在每个函数入口和出口加追踪点，开启时能提供极其精细的时延细节，关闭时开销又非常低。其它工具能提供更深的自省能力，例如允许用户在不重新编译、不重新部署的情况下，动态地给程序添加日志。</p>
 
-<h4>2.3.2.4　性能工具</h4>
+<h4 id="sec-2-3-2-4">2.3.2.4　性能工具</h4>
 
 <p>追踪工具对性能优化也很有帮助。由于追踪带时间戳信息，我们能很好地理解一个重要服务（比如一次购买按钮点击）时延的构成因素。此外，当追踪数据持续不断地被采集时，它们对理解服务在不同负载下的表现，或理解为什么区域 A 的服务实例与区域 B 的表现不同，都非常有价值。</p>
 
@@ -618,7 +766,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>性能工具不只是观察，还能主动优化。例如，剖析引导优化（profile-guided optimization）[48] 用生产环境使用中的剖析数据来优化同一二进制程序的未来版本。优化过的内存分配器可以减少缓存与 TLB 缺失 [49]。这一领域的进展尤其困难，因为优化的真实性能效应往往只在规模放大后才显现，而且可能与在小规模实验环境里的收益大相径庭 [50]。例如，对分配器做大量内联或特化，在小基准里可能显著提速，却可能拖慢生产二进制：上百万个被内联的分配器导致代码体积膨胀，可能带来过多的指令缓存缺失。</p>
 
-<h3>2.3.3　实践：DevOps 与 SRE</h3>
+<h3 id="sec-2-3-3">2.3.3　实践：DevOps 与 SRE</h3>
 
 <p>WSC（以及后来的公有云）不仅要求应用程序的设计与实现采用新思路，还要求它们被运行的方式也焕然一新。两种最流行的新方法是 DevOps（Development 与 Operations 的合成词）与 SRE（站点可靠性工程，Site Reliability Engineering）。</p>
 
@@ -634,9 +782,9 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>本书主要讲硬件与软件话题，但要打造并维护正确的工程文化，往往更困难、也更重要！这一点留待后续课程再谈。</p>
 
-<h2 class="chead"><span class="no">2.4</span>服务器级软件</h2>
+<h2 class="chead" id="sec-2-4"><span class="no">2.4</span>服务器级软件</h2>
 
-<h3>2.4.1　操作系统与固件</h3>
+<h3 id="sec-2-4-1">2.4.1　操作系统与固件</h3>
 
 <p>WSC 服务器节点上跑的基础软件镜像，与普通企业服务器平台上见到的并没有太大不同。不过，WSC 服务器里的固件、设备驱动或操作系统模块，可以比通用企业服务器简化得多。由于 WSC 服务器的硬件配置同质化程度更高，可存在的设备组合更少，因此固件与设备驱动的开发和测试都能被精简。此外，WSC 服务器部署在相对已知的环境里，这带来针对性能提升的优化可能。例如，WSC 服务器的绝大多数网络连接都通向同一栋楼里的其它机器，丢包率比长途互联网连接低得多。因此我们可以调整传输或消息参数（超时、窗口大小等），以获得更高的通信效率。</p>
 
@@ -646,7 +794,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>硅基信任根在云提供商里很常见，例子包括 Google 的 Titan 芯片 [51]、Amazon 的 Nitro [52]，以及开源项目 OpenTitan [53] 与 Caliptra [54]。</p>
 
-<h3>2.4.2　容器化与虚拟化</h3>
+<h3 id="sec-2-4-2">2.4.2　容器化与虚拟化</h3>
 
 <p>容器化与虚拟化是两种截然不同、又互为补充的技术，用于部署和管理相互隔离的应用。</p>
 
@@ -662,21 +810,21 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 </section>
 
 <section>
-<div class="chapterhead"><h2 class="chtitle">第 3 章　分布式系统基础设施：硬件</h2><div class="csub">WSC Hardware: Computing Building Blocks</div></div>
+<div class="chapterhead"><h2 class="chtitle" id="ch3">第 3 章　分布式系统基础设施：硬件</h2><div class="csub">WSC Hardware: Computing Building Blocks</div></div>
 
-<h2 class="chead"><span class="no">3.1</span>WSC 构建块与设计考量</h2>
+<h2 class="chead" id="sec-3-1"><span class="no">3.1</span>WSC 构建块与设计考量</h2>
 
-<h3>3.1.1　整体架构</h3>
+<h3 id="sec-3-1-1">3.1.1　整体架构</h3>
 
 <p>在前几章讨论的数据中心基础设施之上，现在我们把注意力转向定义仓库规模计算机（WSC）架构的各个硬件构建块。正如逻辑单元构成微处理器、芯片组构成服务器，WSC 系统也由计算、存储与网络的各类组件组合而成，从单个芯片到主板、再到分布式系统。本章希望为「如何选择这些构建块、以及由此产生的软硬件协同设计决策」提供洞见。</p>
 
-<h3>3.1.2　构建横向扩展系统</h3>
+<h3 id="sec-3-1-2">3.1.2　构建横向扩展系统</h3>
 
 <p>构建大规模分布式硬件系统时，我们有两条路：纵向扩展（scale-up，大型共享内存系统），或横向扩展（scale-out，大型集群）。WSC 历史上一直选择横向扩展，用中低端服务器搭集群 [1]，原因很多。最主要的动机是这个背景下这类服务器的成本效率优于高端共享内存系统。核心数量持续增长的趋势还意味着：大多数虚拟机或任务实例都能舒服地装进一台双路（甚至单路）服务器。事实上，如今一台典型物理服务器往往托管着几十甚至上百个虚拟机。</p>
 
 <p>本书以前的版本里，我们深入比较过高端与低端服务器在 TPC-C 基准 [2] 上的表现。例如，第一版比较了 HP Integrity Superdome-Itanium2 与 HP ProLiant ML350 G5，并展示了低端服务器的成本效率如何比高端共享内存系统好四倍。不过，随着时间推移与版本更新，高端服务器市场日渐萎缩成小众，超大规模服务器如今更常见、产量更大。所以，下面我们不再纠结于某几台具体系统的比较，而是给出一个简单的数学模型来思考纵向扩展与横向扩展的权衡，并讨论围绕 CPU 构建块的选择，包括「强壮核与孱弱核」（brawny versus wimpy cores）之争 [3]，以及这些话题多年来的演变。我们也会讨论，对于新兴的加速器系统，纵向扩展对横向扩展的考量有何不同。</p>
 
-<h4>3.1.2.1　一个关于纵向扩展与横向扩展的模型</h4>
+<h4 id="sec-3-1-2-1">3.1.2.1　一个关于纵向扩展与横向扩展的模型</h4>
 
 <p>简单的以处理器为中心的成本效率分析表明：一台容量为 N×M 的服务器，远比 N 台容量为 M 的服务器昂贵。但这种分析忽略了一点：大型共享内存多处理器（SMP）的互通性能，比由商用网络相连的小服务器集群强得多。大型 SMP 里节点之间通信时延在 100 纳秒量级，而服务器集群通常采用的局域网（LAN）网络，时延在 100 微秒量级。对能塞进单台大型 SMP 的并行应用（例如 SAP HANA）而言，这种高效通信能转化为惊人的性能提升。不过，正如前面讨论 WSC 应用时（第 1 章）所述，大多数大型工作负载不太可能塞进一台 SMP。因此，理解「由大型 SMP 组成的集群」与「由低端服务器（虽然用的是与大型 SMP 相同的服务器级 CPU 核心，但每台 CPU 插槽或核心数更少）组成的集群」之间的相对性能，就很重要。下面这个简单模型有助于做这些比较。</p>
 
@@ -708,7 +856,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>这个分析在性质上是定性的：它说明，在为任何单台高端服务器都装不下的应用设计系统时，我们需要换一种方式思考基准平台的选择。核心观点是：真正重要的性能效应，是那些在仓库规模上惠及整个系统的效应。对计算影响最大、且局限于单节点的性能增强（比如我们例子里快速的 SMP 式通信）仍然非常重要。但如果它们带来沉重的额外成本，其成本效率对 WSC 而言可能不如对小规模计算机那么有竞争力。</p>
 
-<h4>3.1.2.2　横向扩展的粒度：强壮核与孱弱核</h4>
+<h4 id="sec-3-1-2-2">3.1.2.2　横向扩展的粒度：强壮核与孱弱核</h4>
 
 <p>显然，人们可以用上面的论证走得更远：用比当今服务器级 CPU 核心更小（更「孱弱」[4]）的核心。实际上，此前已有几项研究探索过这个方向：Piranha 芯片多处理器 [5] 是最早在企业级服务器系统里倡导使用低端核心的系统之一。Lim 等人 [6] 为服务器平台里的低端、低功耗处理器核心提出论证。这项工作催生了 HP Moonshot 服务器 [7]，它在一个 4.3U 机箱里放了 45 台基于 ARM 或移动 x86 的刀片服务器。Hamilton [8] 为 PC 级组件提出了类似论证，为 Amazon 基于 Graviton 的 ARM 服务器产品线 [9] 铺平了道路。FAWN（Fast Array of Wimpy Nodes）项目 [4] 探索了用孱弱核构建基于闪存的能效键值存储系统的价值，重点关注存储服务器里更偏 I/O 与内存约束的计算。</p>
 
@@ -738,7 +886,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>上面关于更细粒度利弊的讨论，为设计决策提供了宽泛的指导。追求单核速度最大化的设计，与通过降低单核速度来提高每插槽吞吐的设计，在服务器机队里都有各自的位置。但如果两者速度相差越大，任何单插槽价格/吞吐优势越不可能在实际部署中兑现，原因就是上面讨论过的那些开销。</p>
 
-<h4>3.1.2.3　加速器的纵向扩展对横向扩展</h4>
+<h4 id="sec-3-1-2-3">3.1.2.3　加速器的纵向扩展对横向扩展</h4>
 
 <p>到目前为止我们聚焦于传统计算服务器，但在构建大规模新兴 WSC 加速器系统时，我们也面临类似的权衡。本章后面会讨论不同加速器的设计（针对 ML 负载的 GPU 与 TPU、针对视频负载的 VCU），以及我们如何把这些系统扩展到 WSC 规模。由于加速器系统是定制设计的、面向特定负载做垂直集成方案，产量往往低于传统服务器，它们的设计权衡可能不同。</p>
 
@@ -749,9 +897,9 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>总的来说，虽然这个领域仍相对新生、还在演进，我们预计前面讨论过的原则同样适用于这些系统的设计：对较小规模的工作负载，纵向扩展会带来显著的性能及相关性能/价格优势；但成本效率、以及利用行业硬件和分布式系统管理上的巨额软件投入的能力，总会让横向扩展对更大得多的工作负载依然重要。</p>
 
-<h2 class="chead"><span class="no">3.2</span>计算：服务器与机架</h2>
+<h2 class="chead" id="sec-3-2"><span class="no">3.2</span>计算：服务器与机架</h2>
 
-<h3>3.2.1　服务器硬件</h3>
+<h3 id="sec-3-2-1">3.2.1　服务器硬件</h3>
 
 <p>装在各机架里的服务器是 WSC 的基本构建块。它们由层级的网络互连，并由共享的供电与制冷基础设施支撑。</p>
 
@@ -799,7 +947,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 <span class="cap">图 3.6　分叉式 2×1 路系统框图（DaaC Fig. 6.6）</span>
 </fig>
 
-<h3>3.2.2　硬件机架</h3>
+<h3 id="sec-3-2-2">3.2.2　硬件机架</h3>
 
 <p>机架是把几十台服务器聚在一起的物理结构。机架不仅提供物理支撑，还处理共享供电基础设施，包括电力输送、电池备份与电力变换（例如交流到 48V 直流）。机架的宽度与深度随各 WSC 而异：有的是经典的 19 英寸宽、48 英寸深，有的更宽或更浅。机架设计也因目标是服务器托盘、网络还是加速器而不同，因用于主园区还是边缘或托管园区而不同。用在「pod」或「clique」[13] 里、或者采用不同制冷考量（空气对液体）时，机架设计考量也会变化。我们会在下一节更多讨论 pod 里的加速器机架设计。</p>
 
@@ -821,7 +969,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>Open Compute Project [14] 为许多 WSC 硬件组件提供了详细规格。</p>
 
-<h3>3.2.3　把单台服务器看作分布式系统</h3>
+<h3 id="sec-3-2-3">3.2.3　把单台服务器看作分布式系统</h3>
 
 <p>过去，服务器设计是「独石」（monolith）式的：单节点机器，类似图 3.9（a），有一个主计算综合体、由单一操作系统管理。然而，如图 3.9（b）所示，今天的系统在主 CPU 之外包含多个计算元素：管理控制器、智能网卡、加速器，各自运行自己的操作系统。这种做法改善了安全与可管理性，也支持「裸金属」服务器，让云客户可以不经虚拟化地直接访问 CPU。解聚（disaggregated）设计进一步把服务器重新定义为一个虚拟构造：系统资源被配置成可动态重新分配的池，资源切片在一张由单个硬件组件组成的网络上复用。例如，服务器不必物理地装一块本地 SSD 或 GPU，而可以通过 PCIe 或 CXL 这类高速总线、甚至通过以太网，连接到一个机架级的此类设备池。图 3.9 展示了服务器如何演变成一个运行多个固件与系统栈的复杂分布式系统。</p>
 
@@ -852,23 +1000,23 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>每次我们的管理进程升级（或降级）某台机器的固件时，我们会基于机器模型里找到的计算元素与信任根，生成一份新策略（并撤销旧的）。为避免让调度器依赖另一项服务（那可能损害可用性），我们把机器的策略存在机器本身上，并由证书颁发机构做密码学签名。如果策略签名有效，调度器就向各个场的控制器发 RPC，从策略所列每台设备的信任根收集证明声明。如果每个证明都与其策略意图相符，调度器就把这台机器加入集群，允许在其上调度作业。更多细节，我们请读者参阅 Open Compute 上更详细的技术论文及相关贡献 [15] [16]。通过把硬件设计约束到符合「场」的定义、并把每台机器知识从代码移进模型，我们已经能够简化对硬件信任的推理、把 WSC 规模的管理扩展到日益复杂的服务器，并大幅降低引入新服务器配置的软件工程成本（与延误）。</p>
 
-<h2 class="chead"><span class="no">3.3</span>加速器与定制硅片</h2>
+<h2 class="chead" id="sec-3-3"><span class="no">3.3</span>加速器与定制硅片</h2>
 
 <p>在本书上一版里，我们讨论了专用计算加速器的引入。自那以来，它们的普及呈指数级扩张，涌现出一大批服务于机器学习、视频处理、网络、数据搬运、安全等领域的新加速器。</p>
 
-<h3>3.3.1　专用化与摩尔定律的终结</h3>
+<h3 id="sec-3-3-1">3.3.1　专用化与摩尔定律的终结</h3>
 
 <p>历史上，设计第一批 WSC 时，我们对部署专用计算是避而远之的。虽然它承诺更高的计算效率，但这些好处以「只针对有限数量、只有它们能受益的工作负载做专门化」为代价，这与 WSC 的规模与批量基本原则相悖。此外，专用硬件更长的提前期与更高的开发成本，面临被通用 CPU 快速进步淘汰的风险：当 CPU 速度每年翻倍、而一颗 ASIC 需要两年才部署时，它必须提供远超过 4 倍的加速，才能摊薄开发成本。然而，随着传统工艺技术缩放的放缓（先是针对能效的登纳德缩放 Dennard scaling，后来是针对成本效率的摩尔定律缩放），我们不再看到通用 CPU「单位成本性能」的复合高增长率。</p>
 
 <p>与此同时，新的处理需求可能出现并大到需要专门化。建造 TPU 的一个关键动机是如下观察：如果每位 Android 用户只需几分钟的语音识别能力，当时（2013 年）我们就把 Google 的整个计算能力翻倍都不够。通过 GPU 或 TPU 这类专用加速器为大规模负载类优化硬件，是解决这种供需缺口的唯一办法。</p>
 
-<h3>3.3.2　ML 加速器与 TPU 系统</h3>
+<h3 id="sec-3-3-2">3.3.2　ML 加速器与 TPU 系统</h3>
 
 <p>深度神经网络（DNN）与 AI 工作负载（第 1 章描述过）是计算密集型的。它们的特点是：需要快速线性代数运算、大规模分布式计算与高带宽内存。AI 工作负载包含多个计算需求各异的阶段。训练需要成百上千颗芯片，才能容纳参数众多的大模型与体量庞大的训练数据，同时满足收敛时间要求。推理（也叫 ML 服务）面向用户、有严格时延期限，但可以在较小的 pod 里运行。微调（fine-tuning）与蒸馏（distillation）处在一个中间地带，但有独特考量（例如在中等规模的系统上用大数据跑小模型）。大型语言模型（LLM）的兴起放大了这些需求（还记得第 1 章的图 1.16）。</p>
 
 <p>这些需求推动了面向 AI 的专用领域加速器与系统的发展。GPU（图形处理单元）最初主要用于图形渲染，如今已成为现代 ML 加速的基石。Google 设计并部署了多代更专用的 AI 加速器，叫 TPU（张量处理单元）。除了 GPU 与 TPU，业界还探索并引入了一系列其它加速器。Microsoft 通过 Catapult 与 Brainwave 项目 [17] 使用 FPGA，后来又推出了专用 ASIC Maia [18]。Meta 开发了 MTIA（Meta 训练与推理加速器）[19]，Amazon 则推出了 Inferentia 与 Trainium 系统 [20] [21]。</p>
 
-<h4>3.3.2.1　TPU</h4>
+<h4 id="sec-3-3-2-1">3.3.2.1　TPU</h4>
 
 <p>Google 的张量处理单元（TPU）是为 AI 专门定制的领域专用加速器与系统。它们的演进（图 3.12）反映了 AI 日新月异的版图，每一代都引入架构创新，以应对新出现的挑战与机会。2015 年发布的 TPUv1，聚焦于加速推理。TPUv2 增加了训练支持，其特色是用高带宽的环状（torus）网络连接多颗芯片。TPUv3 通过液冷进一步扩展性能，支持更强大的芯片与更大的系统。TPUv4 通过光电路交换机（OCS）引入可重构光互联，允许灵活的系统配置并增强韧性；它还增加了 SparseCore，一种面向推荐模型不规则内存访问模式专门优化的数据流处理器。TPUv5 与 TPUv6（Trillium）系统进一步提升了单芯片性能、内存与最大 pod 规模。</p>
 <p class="upd"><b>【2026 年更新】</b>2025 年 4 月，Google 发布第七代 TPU Ironwood（TPUv7），称其为第一款面向「推理时代」设计的 TPU：单芯片 FP8 峰值算力 4614 TFLOPS，配 192 GB HBM3e（带宽约 7.4 TB/s），单 pod 最多扩展至 9216 颗液冷芯片，整 pod 聚合算力 42.5 EFLOPS，约为当时全球最大超算 El Capitan 的 24 倍。Ironwood 于 2025 年 11 月全面上市，Gemini 3 即在其上训练与服务；Anthropic 还宣布计划使用最多 100 万颗 Google TPU。<span class="usrc">来源：Google 官方博客（Cloud Next 2025 与 2025 年 11 月）</span></p>
@@ -913,7 +1061,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>TPU 强调扎实的软件栈与可编程性，XLA 编译器执行融合（fusion）与 LLM 自动分片（auto-sharding）等关键优化，这对性能与效率至关重要。最后，TPU 始终为改善性能与每瓦性能（粗略代表性能/TCO [22]）而优化。这些进步与设计选择跟上了 AI 的快速演进，并支撑了最先进的推荐系统与大型语言模型 [23]（图 3.15）。</p>
 
-<h4>3.3.2.2　GPU</h4>
+<h4 id="sec-3-3-2-2">3.3.2.2　GPU</h4>
 
 <p>图形处理单元（GPU）是为并行处理设计的专用处理器。每颗 GPU 芯片容纳大量 SIMT（单指令多线程）风格的核心，利用大规模并行实现高计算吞吐。最初（1990 年代中期）GPU 专注于加速图形处理，因此得名。十年后（2006 年），GPU 分成传统图形导向的加速器与面向高性能计算市场的「通用」GPU（GP-GPU）。这些 GP-GPU 不再是光线跟踪器与像素着色器，而加速完整 32 位与 64 位浮点向量的运算。</p>
 
@@ -938,7 +1086,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 <p>连续几代 GPU 持续提升 FLOPS、内存容量与带宽以及网络能力。此外，在低精度数值上的投入（从 bf16 到 fp8、fp4）提升了峰值 FLOPS，并支持更大的模型。</p>
 <p class="upd"><b>【2026 年更新】</b>NVIDIA 于 2025 年 3 月发布 Blackwell Ultra（GB300 NVL72），并公布后续路线图：Vera Rubin 机架级系统（2026 年下半年）与 Rubin Ultra NVL576（2027 年下半年，NVLink 域扩至 576 颗 GPU）。GB200/GB300 NVL72 把 72 颗 GPU 组成一个 NVLink 域，聚合互连带宽 130 TB/s，整机架功耗约 120 至 145 kW 且全部液冷；下一代 NVLink 每 GPU 双向带宽将从 1.8 TB/s 提升到 3.6 TB/s。<span class="usrc">来源：NVIDIA GTC 2025 与官网（2025 年）</span></p>
 
-<h3>3.3.3　视频加速器与 VCU 系统</h3>
+<h3 id="sec-3-3-3">3.3.3　视频加速器与 VCU 系统</h3>
 
 <p>在 Google 为机器学习引入 TPU 加速器的成功经验之上，我们把目光投向另一个基础工作负载：视频处理。视频是互联网流量的主导来源 [24]。视频处理支撑着云上的几个重要工作负载：视频流、视频会议、在线游戏等。直播的日益流行，加上更高的视频质量/分辨率（例如 4K/8K 视频），相应推动视频处理所需计算资源呈指数级增长。相比之下，视频分发（即实际的流式传输）计算上很便宜，因为处理好的视频块只是复制给网卡。</p>
 
@@ -986,15 +1134,15 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>除了新编解码器支持，下一代 VCU 还引入需要成本效率才能规模化的特性。我们扩充硬件加速的缩放与预处理算法套件，以支持在 CPU 或 GPU 上过于昂贵的视频滤镜，包括支持在帧级或子帧级运行的 ML 模型。此外，虽然 AV1 这类新编解码器因其依赖客户端设备的硬件解码器，往往要近十年才广泛普及，但对既有 H.264 与 VP9 编解码器的持续算法改进，在整个 VCU 生命周期里仍然宝贵。新一代 VCU 还包含性能改进，例如重设计编码器核心功能以最大化编码器忙碌周期、提高编码器时钟频率，以及采用新工艺、PCIe 与内存架构，跟上更高的编码器吞吐。</p>
 
-<h2 class="chead"><span class="no">3.4</span>网络</h2>
+<h2 class="chead" id="sec-3-4"><span class="no">3.4</span>网络</h2>
 
 <p>WSC 是跨机架、集群、数据中心、园区、甚至全球多个区域的大规模分布式系统。因此，网络子系统是 WSC 系统设计的基础。</p>
 
-<h3>3.4.1　从托盘到地球的完整网络</h3>
+<h3 id="sec-3-4-1">3.4.1　从托盘到地球的完整网络</h3>
 
 <p>一个数据包的旅程始于一条简单的信息：也许是一封邮件的一小段、一个视频的片段，或用户的一条命令。这条数据源自运行在某台主机（往往在虚拟机里）上的应用，被移交给主机的网络协议栈。整理好的数据被交给网卡（NIC 或智能网卡 smartNIC），网卡把它封装成帧，加上头部与用于检错的校验和。此时，数据包做好了启程的准备。它可能穿过集群网络，到达同一集群内的目的机器；也可能继续经园区网或广域网（WAN）到达远处集群的一台机器；甚至可能通过连接 ISP 提供商的边缘网络，走向更广大的互联网。这段旅程中遇到的网络协议栈包含多个组成部分，往往有多种不同配置与代次。下面我们聚焦描述网络架构，以约 2023 年的设计为主。更多细节见几篇 Google 论文 [26] [27] [28] [29] [30] [31] [32]。</p>
 
-<h3>3.4.2　主机网络与智能网卡</h3>
+<h3 id="sec-3-4-2">3.4.2　主机网络与智能网卡</h3>
 
 <p>WSC 主机需要高吞吐、低时延、低尾时延、流量整形（pacing 与限速 rate limiting）、绕过操作系统（OS-bypass）、严格的安全与线速加密、可调试性、QoS 与拥塞控制等，并且所有这些都只占少量主机 CPU。公有云还要求支持虚拟化与虚拟机迁移的特性。这些需求可以用两条互补的路径满足：onload，即主机网络软件利用主机 CPU 提供低时延与丰富特性；offload，即利用网卡上的计算承担包处理与密码学函数等功能。实现的例子包括 Azure 的 FPGA bump-in-the-wire NIC [33]、Amazon 为裸金属支持定制的网卡、Google 的主机侧流量整形 [34]，以及 Google 的 Andromeda 网络虚拟化 [35]。</p>
 
@@ -1020,7 +1168,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>把网卡与数据加速器集成，将网络与存储硬件加速和卸载计算综合体紧密耦合。这实现了硬件与软件包处理、命令处理的灵活交织。这种集成还支持灵活的 I/O 虚拟化与资源解聚，并显著降低整体系统 TCO。</p>
 
-<h3>3.4.3　集群网络</h3>
+<h3 id="sec-3-4-3">3.4.3　集群网络</h3>
 
 <p>WSC 集群必须以高速互连数千台服务器。遗憾的是，我们不能直接买（或造）任意大的交换机。在任何时点，可用技术都限制单芯片总容量，因为所有芯片都受功耗与引脚限制。例如，截至 2024 年，一颗典型的商用交换芯片支持高达 51.2 Tbps 的对分带宽（128 个 400 GbE 端口），而且没有能超过 200 Tbps 的芯片可用。我们可以通过级联单个交换芯片来构建更大的交换机，通常做成胖树（fat tree）或 Clos 网络的形式 [36] [30]。Clos 网络得名于 1952 年首次形式化其性质的 Charles Clos。基本思想是：每台叶子交换机把它的端口分成朝下（接服务器）的端口与朝上（接骨干 spine）的端口。在完全连通的树里，一半端口朝向各一边，所以如果我们有 k 端口交换机，k/2 个端口连服务器，其余连到 k/2 台骨干交换机之一。用这种拓扑，每台叶子交换机到其它任何叶子交换机都有 k/2 条路径，每条路径经过一台不同的骨干交换机。在真实网络里，这个概念被递归应用：一台交换机可以组合进一个机箱、形成更大的交换机，多个交换机组箱可以组合形成一个「块」（block），看起来像一台更大的虚拟交换机，从而构成一张数据中心网络，如图 3.24 所示。</p>
 <p class="upd"><b>【2026 年更新】</b>这一上限已被翻倍：博通于 2025 年 6 月开始出货 Tomahawk 6，业界首颗 102.4 Tbps 单芯片以太网交换机（128 个 800 GbE 端口或 64 个 1.6 TbE 端口）；2025 年 10 月又发布共封装光学（CPO）版本 Tomahawk 6 Davisson，光互连功耗较传统可插拔光模块降低约 70%。<span class="usrc">来源：博通官方发布（2025 年 6 月与 10 月）</span></p>
@@ -1053,7 +1201,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>与 WSC 相比，高性能计算（HPC）超级计算机集群的计算与网络带宽之比通常低得多，因为天气模拟这类应用把数据分布到所有节点的 RAM 里，节点执行相对较少的浮点运算后就需要更新邻居节点。因此，传统 HPC 系统一直使用拥有领先链路带宽的专有互联、低得多的时延（尤其是屏障同步或 scatter/gather 这类常见操作，往往由互联直接支持），以及某种全局地址空间（网络与 CPU 缓存和虚拟地址集成）。随着商用互联性能快速提升，以太网、HPC 优化的以太网变体 [39] [40] 与 InfiniBand 开始主导超算 [41]。</p>
 
-<h3>3.4.4　无骨干（Spine-less）网络</h3>
+<h3 id="sec-3-4-4">3.4.4　无骨干（Spine-less）网络</h3>
 
 <p>WSC 不仅大规模部署（例如超过 40 MW 的基础设施），而且其计算、存储与加速器设备总在演进，这要求定期刷新本机网络互联速度，从几年前常见的 40 Gbps 到今天的 400 Gbps。因此，WSC 网络需要动态演进，而不能关停楼宇规模既有庞大基础设施托管的服务。</p>
 
@@ -1077,7 +1225,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>OCS 层还支持动态拓扑，以适应「大象流」这类应用特定的通信模式。例如，如果 ML 训练这样的大计算横跨两个汇聚块、需要更多带宽，OCS 骨干可以被重配置，为这两个块分配额外端口。有了 OCS，重配置网络连接已成为常规操作，首次让数据中心里的「拓扑工程」成为可能。</p>
 
-<h3>3.4.5　仓库规模数据中心里的光互联</h3>
+<h3 id="sec-3-4-5">3.4.5　仓库规模数据中心里的光互联</h3>
 
 <p>数据中心内部的互联在可能的情况下用铜缆，因为它们更便宜、更省电。但随着链路速度提高，铜缆的最大长度下降，以致今天铜缆只在机架内可行：用于 NIC 到 ToR 的链路，以及密集交换机组里交换机到交换机的链路。</p>
 
@@ -1085,7 +1233,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>数据中心内部，光链路根据距离使用不同类型的光器件以优化成本。每个交换机端口有一个可插拔的光模块（用 QSFP、QSFP-DD 或 OSFP 等格式），以支持所需配置、并允许故障时更换。用并行光纤的短距光器件用于下一级光链路，到达距离约 100 米。它们常用于 ToR 到汇聚块，那里距离短，而且需要分叉（lane breakout）与重排（shuffling）以获得更好的容错。对更远的距离、以及涉及 OCS 的情况，使用波分复用（WDM）：每根光纤承载多种颜色的光，以降低光纤成本与体积，并更高效地利用 OCS 交换端口。</p>
 
-<h3>3.4.6　专用网络</h3>
+<h3 id="sec-3-4-6">3.4.6　专用网络</h3>
 
 <p>应对网络可扩展性的另一种办法，是把一些流量卸载到专用网络上。例如，我们可以建一张独立网络，把服务器连到存储单元。这类网络通常叫存储区域网络（Storage Area Network，SAN）。如果那种流量更局部化（并非所有服务器都要挂到所有存储单元），我们可以建更小规模的网络，从而降低成本。历史上，所有存储都这样联网：SAN 把服务器连到磁盘，通常用光纤通道（FibreChannel）网络而非以太网。今天以太网更常见，因为它提供了相当的速度，而光纤通道承载以太网（FCoE [42]）、SCSI over IP（iSCSI [43]）、以及更近的 NVMe [44] 等协议，让「融合」以太网得以提供传统 SAN 的功能。在 WSC 里，存储流量可以完全避开传统存储协议；例如，Google 的存储层通过 Colossus RPC 访问（见 2.2.2 节）。类似地，AWS 使用 SRD，一种以太网上的专有协议 [45]。</p>
 
@@ -1094,7 +1242,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 <p>然而，这些专用加速器互联的规模有限。截至 2025 年，最大的 TPUv7 pod 有 9216 颗芯片，最大的 NVLink pod 有 256 块 H100 GPU。大型训练运行需要的还不止这些，它们要求数据中心网络以每节点数百 Gbps 的速度支持多个 pod 之间的高带宽互联。这种 pod 间网络往往也是独立网络，这样加速器到加速器的流量只在这张网络上走。反过来，连在加速器上的服务器有它们自己的网卡，把它们连到数据中心的其余织体，应用流量只在这张网络上走。</p>
 <p class="upd"><b>【2026 年更新】</b>截至 2025 年底，Ironwood（TPUv7）已全面上市，单芯片 FP8 算力 4614 TFLOPS、192 GB HBM3e，9216 芯片 pod 聚合算力 42.5 EFLOPS。GPU 一侧，NVIDIA GB200/GB300 NVL72 机架级系统以 72 颗 GPU 为一个 NVLink 域（聚合带宽 130 TB/s）；2025 年 5 月发布的 NVLink Fusion 进一步允许第三方 CPU 与定制加速器接入 NVLink 生态。路线图上的 Vera Rubin NVL144（2026 年下半年）与 Rubin Ultra NVL576（2027 年下半年）将继续扩大 NVLink 域。<span class="usrc">来源：Google Cloud 官方博客与 NVIDIA 官网（2025 年）</span></p>
 
-<h3>3.4.7　广域网（WAN）</h3>
+<h3 id="sec-3-4-7">3.4.7　广域网（WAN）</h3>
 
 <p>本书主要聚焦网络架构中数据中心的方面，因此这里只简要涉及 WAN 与边缘网络。云提供商开发了私有 WAN，把分布在全球的数据中心连接起来。由于 YouTube 流量、Google Drive、Google 广告投放等内部需求，Google 的网络比其它公有云提供商整整大一个数量级。截至 2024 年，Google 拥有或共同拥有 31 条海底光缆（图 2.5 [47]）。</p>
 <p class="upd"><b>【2026 年更新】</b>截至 2025 年 11 月，Google 参与投资或建设的海底光缆已增至 33 条（其中 6 条完全私有），新增项目包括跨大西洋的 Sol 光缆（连接美国、百慕大、亚速尔群岛与西班牙）、澳大利亚至泰国的 TalayLink、以及连接智利与澳大利亚的南太平洋光缆等。Google Cloud 全球网络的光纤总长（陆地加海底）已达约 1000 万公里，WAN 带宽在 2020 至 2025 年间增长了 7 倍。<span class="usrc">来源：Google Cloud 官方博客与 TeleGeography 统计（2025 年）</span></p>
@@ -1103,13 +1251,13 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>这些创新帮助云提供商改善了网络的性能与可靠性，也让他们能以很高速度部署新的网络特性。更多 WAN 与边缘网络的细节见 [48] [49] [29] [50] [51] [52] [53]。</p>
 
-<h2 class="chead"><span class="no">3.5</span>存储</h2>
+<h2 class="chead" id="sec-3-5"><span class="no">3.5</span>存储</h2>
 
 <p>除调试日志、临时文件等少数例外，持久化存储数据需要能被任何服务器访问。因此，存储是一种服务，而不是一种设备类型。在底层，磁盘或 SSD 整机把块设备开放到网络上；在更高层，Colossus 或 GCS 这类文件系统把存储开放给应用。</p>
 
 <p>WSC 工作负载处理的数据大致分两类：瞬时（ephemeral）数据与持久（persistent）数据。瞬时数据通常对单个任务私有，可以通过重启任务重新生成。持久数据通常是构成分布式工作负载共享状态的数据。瞬时数据往往放在本地 DRAM 或本地存储里，很少复制，因其瞬时性质与单一拥有者而管理简单。相反，持久数据必须远更耐久，并被大量客户访问，因此需要远更复杂的分布式存储系统。下面我们讨论这些 WSC 存储系统的主要特征。</p>
 
-<h3>3.5.1　存储介质</h3>
+<h3 id="sec-3-5-1">3.5.1　存储介质</h3>
 
 <p>现代 WSC 存储海量数据，这些数据的访问带宽与时延需求千差万别，从可能保存几十年却很少访问的档案数据，到可能几秒后被覆写、却是关键性能瓶颈的草稿数据。没有哪种单一技术能满足所有这些需求，因此 WSC 采用一套精心搭配的存储技术组合。</p>
 
@@ -1131,13 +1279,13 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>随着硅晶体管小型化接近极限，SSD 的容量增长与降价由越来越深的 3D 闪存与每存储单元更多位数驱动。更高的字节密度尤其以更高时延与显著更低的耐久性为代价。HDD 与 SSD 的每字节 TCO 差距持续缩小，因此更多 IOPS 需要从越来越大的 HDD 上卸载。于是，SSD 在 WSC 存储组合中的占比持续上升。</p>
 
-<h3>3.5.2　无盘服务器</h3>
+<h3 id="sec-3-5-2">3.5.2　无盘服务器</h3>
 
 <p>在 2010 年的 WSC 服务器里，本地硬盘提供直连存储，并充当引导/日志/草稿空间。当时的网络带宽每台服务器勉强达到 1 Gbps，一块满速运转的磁盘几乎就能把这条带宽占满。但随着网络速度快速提升而磁盘吞吐相对静止，把存储搬出服务器就变得有利 [56]。存储容量与 I/O 带宽可以更容易、更高效地在许多服务器之间共享，靠专门的独立存储托盘实现，从而为 WSC 带来显著的总体 TCO 节省，因为现在可以独立于计算能力来供给存储容量，减少了两者在维度上的闲置资源。</p>
 
 <p>鉴于传统上对存储设备的大部分需求现在都由这些托盘处理，计算服务器只保留一块本地 SSD 用于特殊目的，而不是一般存储。Google 服务器里有一块小的本地 SSD 充当引导设备，同一设备还临时存放调试日志。此外，有些应用要求极低、且/或一致的时延，这最好通过让一块或多块 SSD 尽量贴近处理来满足。通常，这类本地存储只用作缓存（即数据仍存在分布式文件系统里），因为要提供存储的可靠性与持久性，不重新发明一个分布式文件系统很难做到。</p>
 
-<h3>3.5.3　磁盘整机（Disk Appliance）</h3>
+<h3 id="sec-3-5-3">3.5.3　磁盘整机（Disk Appliance）</h3>
 
 <p>整机（appliance）由一个带处理器与网卡的整机托盘、连同若干 HDD，加上一个或多个控制硬件最少的外接托盘组成。这种设计允许改变每台整机的磁盘数量，以适应本地条件或工作负载随时间的变化。图 3.29 展示了 Google 使用的一款磁盘整机，它容纳几十块硬盘（本例总共 43 块盘，分别安在一个整机托盘与两个外接托盘里）。整机托盘为这些硬盘提供电力、管理、机械与网络支持。它运行一套定制的软件栈，管理其本地存储、并通过 RPC 响应客户请求。HDD 有限的 IOPS 与相对较高的时延，让一个性能普通的处理器与网卡就能处理几十块 HDD 的流量。</p>
 
@@ -1148,7 +1296,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>由于单块盘 I/O 容量只有 100 至 200 MB/秒，一台典型整机把一台配 128 GB RAM（用于缓存）的「主」服务器与 50 至 100 块 HDD 搭配，总存储容量 1 PB 以上、吞吐 50 Gbps 以上。每块 HDD 消耗 8 至 10 W，让整台整机的功耗处在 1 kW 上下。因此，整个磁盘整机机架的功耗（5 至 10 kW）远低于一个服务器机架（20 至 40 kW），更不用说加速器机架（100 kW 以上）了。</p>
 
-<h3>3.5.4　闪存整机（Flash Appliance）</h3>
+<h3 id="sec-3-5-4">3.5.4　闪存整机（Flash Appliance）</h3>
 
 <p>如 3.5.2　节所述，解聚存储可以通过提高存储利用率降低成本。这个优势必须与额外的时延与带宽开销相权衡。即便对带宽高得多、时延低得多的 SSD，这个权衡对大多数应用也是可以接受的。因此，WSC 里大部分固态存储放在网络附加的整机中。SSD 整机在概念上与 HDD 整机类似，但有一组不同的约束。</p>
 
@@ -1165,7 +1313,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>闪存相对磁盘最吸引人的特性，是它随机读操作的性能，几乎好三个数量级。注意，最坏情况下，写闪存可能比读慢几个数量级，而垃圾回收如果管理不当，还会进一步增加写放大与尾时延。NAND 闪存那些「有趣」的特性（读写不对称、读写干扰、垃圾回收）带来了新挑战与新机会，但这超出了本书的范畴。</p>
 
-<h3>3.5.5　智能存储</h3>
+<h3 id="sec-3-5-5">3.5.5　智能存储</h3>
 
 <p>传统上，企业存储系统在简单存储之外还包含「智能」功能。例如，它们提供加密、压缩与块去重功能，以改善安全性、性能与每字节有效成本。在 WSC 里，这类功能已上移到软件栈的更上层（即文件系统，或建立在文件系统之上的数据库）。由于所有数据在到达实际存储设备前都已加密，设备级的压缩不再有效。同样，由于文件系统为可用性复制数据，一台试图靠给存储数据去重来省空间的智能磁盘整机反而会适得其反。</p>
 
@@ -1175,15 +1323,15 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 </section>
 
 <section>
-<div class="chapterhead"><h2 class="chtitle">第 4 章　数据中心基础设施：风火水电</h2><div class="csub">WSC Hardware: Data Center Infrastructure</div></div>
+<div class="chapterhead"><h2 class="chtitle" id="ch4">第 4 章　数据中心基础设施：风火水电</h2><div class="csub">WSC Hardware: Data Center Infrastructure</div></div>
 
-<h2 class="chead"><span class="no">4.1</span>数据中心基础设施基础</h2>
+<h2 class="chead" id="sec-4-1"><span class="no">4.1</span>数据中心基础设施基础</h2>
 
-<h3>4.1.1　从地球到园区到楼宇</h3>
+<h3 id="sec-4-1-1">4.1.1　从地球到园区到楼宇</h3>
 
 <p>互联网与云服务运行在一台「行星级计算机」上，它的工作负载分布在全球各地的多座数据中心楼宇里。这些数据中心的设计目标，是为计算、存储与网络基础设施提供安身之所。楼宇的主要功能，是交付设备和人员所需的公用设施：电力、制冷、庇护与安保。按经典物理学的定义，数据中心里几乎不产生任何功。除了逃逸出去的一些光子，所有消耗的能量都转化为热量。输送输入能量、随后带走废热，正是数据中心设计的核心，也驱动了非计算成本的绝大部分。数据中心的建设成本大约与所输送的功率成正比，通常在每瓦 5 至 20 美元之间，具体数字随规模、地点与设计差异很大。</p>
 
-<h3>4.1.2　数据中心的基本结构</h3>
+<h3 id="sec-4-1-2">4.1.2　数据中心的基本结构</h3>
 
 <p>数据中心的规模差异悬殊，通常用关键功率（critical power）来描述，即能够持续供给 IT 设备的功率总量。传统企业服务器所在的数据中心，往往小于 5000 平方英尺（450 平方米）、关键功率低于 1 兆瓦 [1] [2]。为多家公司的服务器提供托管而建的商用数据中心（常称托管数据中心，colocation data center，或简称 colo）规模更大，能支撑几十兆瓦的关键负载。大型云提供商的数据中心与此类似，不过往往比托管数据中心更大。有时，许多数据中心会集中在一处，形成园区（campus）。大多数数据中心是单层的，少数是多层的（图 4.1）。WSC 数据中心园区的关键功率通常超过 100 兆瓦。</p>
 <p class="upd"><b>【2026 年更新】</b>国际能源署（IEA）2025 年 4 月《能源与 AI》报告给出全球口径：2024 年数据中心用电约 415 TWh，占全球用电约 1.5%（美国占 45%、中国 25%、欧洲 15%），预计到 2030 年翻倍至约 945 TWh、2035 年约 1200 TWh。一座典型 AI 数据中心耗电相当于 10 万户家庭，在建的最大设施将达其 20 倍。园区规模本身也在跃迁：NVIDIA 于 2025 年提出「吉瓦级 AI 工厂」蓝图，单个园区的关键功率正从百兆瓦级走向吉瓦级。<span class="usrc">来源：IEA《能源与 AI》（2025 年 4 月）、NVIDIA OCP 峰会（2025 年）</span></p>
@@ -1216,7 +1364,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 <span class="cap">图 4.4　典型数据中心的主要组成部分（DaaC Fig. 5.4）</span>
 </fig>
 
-<h3>4.1.3　数据中心分级：Tier 体系</h3>
+<h3 id="sec-4-1-3">4.1.3　数据中心分级：Tier 体系</h3>
 
 <p>数据中心的设计常用四分级（Tier）体系来分类 [5]。专长于数据中心的专业服务组织 Uptime Institute 倡导一种四分级分类法，大致基于数据中心的配电、不间断电源（UPS）、制冷输送与冗余程度 [6]。</p>
 
@@ -1237,7 +1385,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>4.4.2　节还讨论了另一种看待数据中心楼宇的视角，即「信封」（envelopes）视角，按基础设施对容纳 WSC 设备的就绪程度来划分。</p>
 
-<h3>4.1.4　云与 AI 对数据中心设计的影响</h3>
+<h3 id="sec-4-1-4">4.1.4　云与 AI 对数据中心设计的影响</h3>
 
 <p>传统上，支撑 WSC 数据中心设计的关键设计哲学拥抱规模经济，并针对超大规模负载与系统做定制设计。但正如第 1 章讨论的，今天的 WSC 因云与 AI/ML 负载而呈现出多得多的多样性。</p>
 
@@ -1255,9 +1403,9 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>下面我们深入数据中心的关键组成、供电子系统与制冷子系统时，会讨论这些考量如何改变 WSC 数据中心的设计权衡。</p>
 
-<h2 class="chead"><span class="no">4.2</span>数据中心供电系统</h2>
+<h2 class="chead" id="sec-4-2"><span class="no">4.2</span>数据中心供电系统</h2>
 
-<h3>4.2.1　整体电力输送架构</h3>
+<h3 id="sec-4-2-1">4.2.1　整体电力输送架构</h3>
 
 <p>电力首先进入一个公用事业变电站（utility substation），它把高电压（通常 110 kV 及以上）变换成中压（通常低于 50 kV）。中压用于园区级分配，送达一级配电中心（也叫单元变电站），那里包含主开关设备与中压到低压的变压器（通常低于 1000 V）。从那里，电力进入楼宇，低压线路送到不间断电源（UPS）系统。UPS 的开关设备还从一组柴油发电机取同一电压的第二个电源，市电故障时发电机切入。UPS 的输出被路由到数据中心楼层的配电单元（PDU）。PDU 是这一变换与分配架构的最后一层，它把各条电路送到架空母线或各个机架。</p>
 
@@ -1290,7 +1438,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>单元变电站与行级母线按交错方式排列，如图 4.8。它们以 N+1 的方式提供了（2N）系统的功能。图中示例用四套基础设施制造三套容量，通常简写为「4/3 DR」。每一（双）排机架由全部四路电源供电，每台机架有两个冗余电源入口。如果其中一路电源失效（无论是单元的变压器，还是它下方的母线断路器），25% 的机架会切到备用电源。因此，只要各路电源平时负载不超过 75%，就不会发生负载中断。以双馈电的机架或双电源服务器为代价，这个方案提供了（2N）冗余，却不需要（2N）的设施。</p>
 
-<h3>4.2.2　交流与直流配电架构比较</h3>
+<h3 id="sec-4-2-2">4.2.2　交流与直流配电架构比较</h3>
 
 <p>高压直流（HVDC）在公用事业电网层面有优势：适合连接互不相容的电网、抵御级联故障、主动控制大规模潮流，以及在长距离高效输电。而在数据中心里，直流配电的理由集中在效率、组件数量减少带来的可靠性提升、占地缩小，以及更容易集成输出天然为直流的分布式发电机。与上文提到的双变换 UPS 相比，直流系统省掉了 UPS 的最后一级逆变。如果电压选得与服务器电源单元（PSU）的直流一次侧匹配，还能再省三步：PDU 变换、PSU 整流与 PSU 功率因数校正。</p>
 
@@ -1310,7 +1458,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>新兴的更密集计算方案（例如由铜互联连接的高功率加速器）通过增大电流与热负荷，给母线施加更大压力。由于大多数新机架设计已经采用直流供电，未来的行业标准可能采用直流母线架构与更高电压。</p>
 
-<h3>4.2.3　不间断电源（UPS）</h3>
+<h3 id="sec-4-2-3">4.2.3　不间断电源（UPS）</h3>
 
 <p>UPS 通常把三种功能合在一个系统里。</p>
 
@@ -1332,7 +1480,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>直到大约 2015 年，数据中心 UPS 用的都是类似 12V 汽车电池的铅酸电池。这类电池相对便宜、可靠，但会随时间老化，需要每五年更换一次。近来，锂离子电池（Li-ion），包括磷酸铁锂（LFP），变得更常见，因为它们放电速率更高、寿命更长。不过它们需要小心的防火措施，因为受损的锂电池可能发生热失控反应并起火。例如，2020 年 10 月，托管韩国公司 Kakao 的一座数据中心就被锂电池火灾摧毁。但只要妥善处理安全（包括严格测试与标准化），就能从锂离子电池中显著受益，支撑 WSC 的不间断运行。最近 Google 达到一个重要里程碑：部署在全球数据中心机队中的锂离子电池组已超过 1 亿只电芯 [15]。</p>
 
-<h3>4.2.4　配电单元（PDU）</h3>
+<h3 id="sec-4-2-4">4.2.4　配电单元（PDU）</h3>
 
 <p>在我们示例的数据中心里，UPS 输出被路由到楼层上的 PDU。PDU 类似住宅里的断路器面板，但也可以集成变压器做最终电压调整。它把较大的输入电路拆成较小的电路，把电送到楼层的机架。每条电路由自己的断路器保护。传统 PDU 处理 75 至 225 kW 的负载，单条电路最多处理约 6 kW（110 至 230 V 下 20 或 30 A）。</p>
 
@@ -1344,7 +1492,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>真实数据中心存在这里所述简化设计的许多变体，包括发电机或 UPS 单元的「并联」：一种多台设备共同喂一条共享母线、一台失效后负载可被其它台拾起的布置，类似于 RAID 系统处理磁盘故障的方式。常见的并联配置有 N+1（允许同时发生一次故障或一次维护操作）、N+2（即便一台单元离线维护也还能容忍一次故障，也叫「可并行维护性」），以及 2N（完全冗余的成对）。</p>
 
-<h3>4.2.5　电力微电网与其它未来机会</h3>
+<h3 id="sec-4-2-5">4.2.5　电力微电网与其它未来机会</h3>
 
 <p>像几乎任何建筑一样，数据中心也并网运行，消耗一家或多家公用事业公司供应的电力。一个世纪前，工业设施更常拥有自己的私人发电厂，但共享电网的经济与可靠性优势取代了几乎所有私人电厂。直到最近，「微电网」（microgrid）的概念重新浮出水面，常见于分布式能源富集、但电网薄弱且不可靠的地理区域。在某些情况下，微电网也能支撑数据中心。</p>
 
@@ -1369,13 +1517,13 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 <p>数据中心电气系统的其它未来机会包括：更高电压（600V）系统以增加输电能力；燃料电池、氢基方案等现场发电技术；采用更先进的传感器与软件定义保护。此外，时间同步扰动记录系统有望带来更好的可观测性与可控性。</p>
 <p class="upd"><b>【2026 年更新】</b>更高电压的路线已有明确行业动作：NVIDIA 在 2025 年 OCP 全球峰会宣布，20 多家生态伙伴将共建 800 V 直流（800 VDC）数据中心基础设施，以支撑未来的吉瓦级 AI 工厂；鸿海高雄一号数据中心（40 MW）已按 800 V 直流建设，CoreWeave、Lambda、Nebius、Oracle 等也在按 800 V 直流设计新设施。<span class="usrc">来源：NVIDIA 官方博客（2025 年 10 月，OCP 全球峰会）</span></p>
 
-<h2 class="chead"><span class="no">4.3</span>数据中心制冷系统</h2>
+<h2 class="chead" id="sec-4-3"><span class="no">4.3</span>数据中心制冷系统</h2>
 
 <p>数据中心的使命是给里面的服务器供电、并带走它们产生的热。上一节我们看了如何输送电力，这一节考察制冷系统的设计。</p>
 
 <p>供电与制冷都会造成额外开销。历史上这些开销相当可观，几乎达到 100%，也就是说，数据中心因这些开销消耗的能量是服务器本身需要能量的两倍。但采用最佳实践后，这一开销可缩小到 10% 至 20%。讨论供电时，我们指出了高效配电与 UPS 等最佳实践；同样，制冷子系统也包含大量优化，包括自然冷却（free cooling，再辅以提高服务器目标进风温度而进一步增强）与妥善管理的气流。下面我们详细讨论。</p>
 
-<h3>4.3.1　整体制冷/机械架构</h3>
+<h3 id="sec-4-3-1">4.3.1　整体制冷/机械架构</h3>
 
 <p>数据中心制冷系统负责移除设备产生的热。要移走热，制冷系统必须采用某种「环」（loop）的层级，每个环循环一种冷介质，介质经某种热交换升温，再到环的别处重新被冷却。开环（open loop）用外部来的冷补给替换或补充流出的温热介质，因此每循环一圈都会用掉（一些）新材料。相反，闭环（closed loop）循环一种独立的介质，通过换热器不断把热传给另一个环或环境。所有环最终都必须把热传给外部环境，但内环比这样做：它把热传给外环，再由外环传出去。</p>
 
@@ -1407,7 +1555,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>在典型数据中心里，冷水机组与泵可能给发电机的关键负载增加 40% 甚至更多，显著推高整体建设成本。CRAC、冷水机组与冷却塔是数据中心制冷系统里最重要的构件，下面我们逐一细看。</p>
 
-<h3>4.3.2　机房空调（CRAC）</h3>
+<h3 id="sec-4-3-2">4.3.2　机房空调（CRAC）</h3>
 
 <p>直到 1990 年代，数据中心通常使用机房空调（computer room air conditioner，CRAC）。CRAC 类似家用空调，包含换热器、空气驱动装置与控制部件。CRAC 单元通常位于数据中心楼层的周边，把冷空气吹进房间或架空地板下的空间。它们主要的区别在于所采用的制冷方式：直膨式（direct expansion，DX）、冷冻液式或水冷式。</p>
 
@@ -1415,7 +1563,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>经典设计里，CRAC 单元把冷空气吹进架空地板下的空间，给地板静压箱加压，空气再从机架前方的穿孔地板砖泄出。空气穿过服务器，被排进「热通道」。机架通常排成长排，冷热通道交错布置，以减少冷热空气混合造成的低效。实际上，许多较新的数据中心用墙体物理隔离冷或热通道 [18]。如图 4.13 所示，服务器产生的热空气循环回到 CRAC 的进风口，在那里冷却后又排进架空地板静压箱。</p>
 
-<h3>4.3.3　冷水机组（Chiller）</h3>
+<h3 id="sec-4-3-3">4.3.3　冷水机组（Chiller）</h3>
 
 <p>水冷式冷水机组（chiller，图 4.15）就像一台大型水冷空调。它把蒸发器与冷凝器盘管浸在两个大而互相独立的水箱里，两个水箱通过一个安装在顶部、由压缩机、膨胀阀与管路组成的制冷系统相连。在冷水箱里，数据中心回来的温水被蒸发器盘管冷却，然后回到工艺冷冻水供应（PCWS）回路。在热水箱里，冷凝水环来的冷水被冷凝器盘管加热，把热带到冷却塔，在那里靠蒸发冷却排到环境。变频驱动器（VFD）控制冷水机组电机的转速。因为冷水机组用了压缩机，做这份功要消耗大量能量，所以它不如只用冷却塔高效。但冷却塔在某些天太暖、无法承担全部制冷负荷，冷水机组在那些时候也能工作，因此它被用来补充基于冷却塔的设计，只在需要时运行。</p>
 
@@ -1424,7 +1572,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 <span class="cap">图 4.15　水冷离心式冷水机组（DaaC Fig. 5.15）</span>
 </fig>
 
-<h3>4.3.4　自然冷却</h3>
+<h3 id="sec-4-3-4">4.3.4　自然冷却</h3>
 
 <p>自然冷却（free cooling）指利用外部冷空气来帮助制取冷冻水、或直接冷却服务器。它不是零成本的「完全免费」，但与冷水机组相比能量成本非常低。</p>
 
@@ -1441,7 +1589,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>还有一种办法用散热器（radiator）替代冷却塔，把冷凝液或工艺水泵过一个靠风扇冷却的散热器。与乙二醇/水型 CRAC 类似，这类系统采用乙二醇环以免结冰。散热器在寒冷气候下（比如芝加哥的冬天）效果很好，但在温和或温暖气温下较差，因为能达到的冷水温度受外温干球温度限制，而且对流不如蒸发高效。</p>
 
-<h3>4.3.5　冷却塔</h3>
+<h3 id="sec-4-3-5">4.3.5　冷却塔</h3>
 
 <p>冷却塔（图 4.17）通过把水流的其中一部分蒸发进大气来冷却水流。把液体变成气体所需的能量叫汽化潜热。蒸发掉的水带走这份潜热，因此在天气有利时能把剩余的水显著降温。冷却后水的最终温度接近室外空气的湿球温度；可达到的水温与湿球温度之差叫冷却塔的「逼近度」（approach），通常为 1 至 2 °C。（要达到真正的湿球温度，水流得无限慢才行。）</p>
 
@@ -1464,7 +1612,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>冷却塔在湿度低的温带气候下表现最佳。讽刺的是，在非常寒冷的气候里它们反而没那么好，因为需要额外的机制防止塔身与管道结冰。</p>
 
-<h3>4.3.6　气流设计考量</h3>
+<h3 id="sec-4-3-6">4.3.6　气流设计考量</h3>
 
 <p>传统数据中心采用前面讨论过的架空地板布置。要改变送到某个机架或某一排的冷量，我们会把穿孔地板砖换掉或换入。要制冷效果好，穿过地板砖的冷气流应当与机架内穿服务器的水平气流相匹配。例如，一个机架有 10 台服务器、每台气流为 100 立方英尺/分钟（CFM），那么穿孔地板砖流出的净流量应当是 1000 CFM（如果到服务器的空气路径没有严密控制，还要更高）。如果更低，有的服务器会得到冷空气，另一些则会吸进来自机架上方或其它泄漏路径的再循环热空气。</p>
 
@@ -1479,7 +1627,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>即便做了热通道密闭，气流仍然限制数据中心功率密度。对于固定的服务器跨温差，机架的气流需求随功率消耗增加，供给到机架正面的气流必须随功率线性增长。这会相应增加架空地板静压箱或热通道所需的静压。低功率密度时这很容易做到，但到某个临界点，物理定律会让继续增加压力与气流在经济上不划算。通常，这些限制使得功率密度很难在不显著增加成本的情况下超过每平方英尺 150 至 200 W。</p>
 
-<h3>4.3.7　机架内、行内与液冷</h3>
+<h3 id="sec-4-3-7">4.3.7　机架内、行内与液冷</h3>
 
 <p>机架内制冷（in-rack cooling）可以把功率密度与制冷效率推高到传统架空地板极限之上。通常，机架内冷却器在机架背面加一个空气-水换热器，让服务器排出的热空气立即流过由水冷却的盘管，相当于在服务器尾气与 CRAC 输入之间抄了一条近路。机架内制冷可以移除部分或全部热量，实际上取代了 CRAC。显然，需要把冷冻水送到每个机架，大幅增加管道成本。有些运营者还会担心数据中心楼层上出现水：盘管泄漏或事故可能让水泼到设备上。</p>
 
@@ -1518,9 +1666,9 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>虽然浸没冷却能实现显著更低的 PUE，但尚未被广泛采用。服务器主板可能需要重新设计以兼容冷却液及其对信号完整性的影响，光连接器也可能要重新设计。虽然这些挑战都能解决，但它们把设计移出了主流（通用商品）供应链，造成额外成本。此外，浸没机架显著更难维护，尤其当整体功率密度需要很高、因而需要高液槽时。</p>
 
-<h2 class="chead"><span class="no">4.4</span>数据中心其它设计考量</h2>
+<h2 class="chead" id="sec-4-4"><span class="no">4.4</span>数据中心其它设计考量</h2>
 
-<h3>4.4.1　模块化数据中心设计：速度与效率</h3>
+<h3 id="sec-4-4-1">4.4.1　模块化数据中心设计：速度与效率</h3>
 
 <p>WSC 数据中心规模大、复杂，设计与部署耗时、耗力、耗资。模块化数据中心设计可以改善这些指标。</p>
 
@@ -1537,7 +1685,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>模块化数据中心还支持「晚绑定」配置与灵活的重新配置，以应对新的或地点特定的需求、或供应链约束。例如，热通道冷却结构既可以是普通版本，也可以是抗震评级版本。一座新数据中心可以用标准化部件快速配置出来，让各子系统（网络机房、供电、制冷、空间）独立演进。最后也是最重要的，它们便于制造，包括预部署的模块化施工与运送（例如设备滑移与预装配）。</p>
 
-<h3>4.4.2　经济模型：五个信封</h3>
+<h3 id="sec-4-4-2">4.4.2　经济模型：五个信封</h3>
 
 <p>为缩短提前期、降低成本，数据中心容量可以在不同的完成阶段持有。例如，找到合适的地块、拿到数据中心所需的所有分区审批与公用事业接入，可能要花几个月甚至几年。同样，「平整场地」（即把地面找平或做出坡度，以保证建筑有良好的排水与稳定的地基）可能也要几个月。以平整土地形式持有的容量，比以半成品设施形式持有便宜得多，但把土地变成真正能托管服务器的容量，需要更长的提前期。因此，如果需求不确定（它总是如此！），最好的供应策略是在施工过程的多个阶段都保留缓冲，并且在更早的阶段保留更大缓冲，因为那里的持有成本低得多。</p>
 
@@ -1560,7 +1708,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>WSC 运营者可能全部使用这些信封，也可能只用其中几个，取决于当地情况。例如，对一个小型网络 POP 数据中心，信封 5 通常最具成本效益；而对一个大型数据中心园区，信封 1 通常最便宜。</p>
 
-<h3>4.4.3　数据中心的物理自动化</h3>
+<h3 id="sec-4-4-3">4.4.3　数据中心的物理自动化</h3>
 
 <p>仓库规模计算机与真正的仓库相似之处，不止于外在与规模。WSC 里也发生着大量物资流动。每天都有卡车到达，卸下新设备、把冗余设备运往别处，或运走淘汰的设备。DIMM 与磁盘被送到楼层各托盘、或从托盘取走，服务器与机架在排与层之间搬移，等等。</p>
 
@@ -1586,7 +1734,7 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <p>其它物理自动化也能帮助减轻数据中心技师的身体劳苦。例如，服务器托盘升降机让一名技师就能插入或取出最重的服务器。同样，自主引导车（AGV）可以把托盘送到技师那里、或从技师那里取走，省下他们步行 100 米甚至更远到收集点的时间。由于数据中心用例与其它行业需求相似，一个新兴的自动化供应商生态系统正越来越擅长服务这些用例。</p>
 
-<h2 class="chead"><span class="no">4.5</span>历史回顾</h2>
+<h2 class="chead" id="sec-4-5"><span class="no">4.5</span>历史回顾</h2>
 
 <p>Google 运营 WSC 的头二十五年里，WSC 数据中心经历了显著的演进。Google 最初从第三方托管机房里便宜凑合出来的机架方案起步。图 4.28 展示了这样一个早期部署。当时的托管机房按面积而非功率收费，因此机架在每平方英尺里塞进多得多的服务器，有时功率密度高到设施制冷都撑不住，于是有了图中那台外挂风扇！</p>
 
@@ -1622,5 +1770,263 @@ p.upd .usrc{color:#5b6b7b;font-size:12.5px;display:block;margin-top:4px}
 
 <div class="footer">本讲义译自 L. Barroso 等《The Data Center as a Computer》(4th ed., 2026)<br>供个人学习使用</div>
 </div>
+<aside id="tocside" aria-label="目录">
+<div class="tocHd">目录</div>
+<div class="tocTree" data-level="2">
+<a class="l1" href="#ch1" data-ch="ch1">第 1 章 引言</a>
+<a class="l2" href="#sec-1-1" data-ch="ch1">1.1 背景铺垫</a>
+<a class="l2" href="#sec-1-2" data-ch="ch1">1.2 仓库规模计算机（WSC）</a>
+<a class="l2" href="#sec-1-3" data-ch="ch1">1.3 区域与可用区</a>
+<a class="l2" href="#sec-1-4" data-ch="ch1">1.4 建筑与基础设施</a>
+<a class="l3" href="#sec-1-4-1" data-ch="ch1">1.4.1 服务器</a>
+<a class="l3" href="#sec-1-4-2" data-ch="ch1">1.4.2 存储</a>
+<a class="l3" href="#sec-1-4-3" data-ch="ch1">1.4.3 网络结构</a>
+<a class="l3" href="#sec-1-4-4" data-ch="ch1">1.4.4 能耗</a>
+<a class="l3" href="#sec-1-4-5" data-ch="ch1">1.4.5 故障与维修的应对</a>
+<a class="l2" href="#sec-1-5" data-ch="ch1">1.5 负载</a>
+<a class="l3" href="#sec-c1-s5-h1" data-ch="ch1">WSC 系统栈</a>
+<a class="l3" href="#sec-c1-s5-h2" data-ch="ch1">计算消费模型</a>
+<a class="l3" href="#sec-c1-s5-h3" data-ch="ch1">公有云与超大规模</a>
+<a class="l3" href="#sec-1-5-1" data-ch="ch1">1.5.1 通算负载</a>
+<a class="l4" href="#sec-1-5-1-1" data-ch="ch1">1.5.1.1 大致概览</a>
+<a class="l4" href="#sec-1-5-1-2" data-ch="ch1">1.5.1.2 案例研究：搜索</a>
+<a class="l4" href="#sec-1-5-1-3" data-ch="ch1">1.5.1.3 案例研究：YouTube</a>
+<a class="l4" href="#sec-1-5-1-4" data-ch="ch1">1.5.1.4 案例研究：Gmail</a>
+<a class="l3" href="#sec-1-5-2" data-ch="ch1">1.5.2 AI 负载</a>
+<a class="l4" href="#sec-1-5-2-1" data-ch="ch1">1.5.2.1 训练</a>
+<a class="l4" href="#sec-1-5-2-2" data-ch="ch1">1.5.2.2 推理</a>
+<a class="l4" href="#sec-1-5-2-3" data-ch="ch1">1.5.2.3 大语言模型</a>
+<a class="l4" href="#sec-1-5-2-4" data-ch="ch1">1.5.2.4 AI 计算的特征</a>
+<a class="l1" href="#ch2" data-ch="ch2">第 2 章 分布式系统基础设施：软件</a>
+<a class="l2" href="#sec-2-1" data-ch="ch2">2.1 软件栈总览</a>
+<a class="l2" href="#sec-2-2" data-ch="ch2">2.2 分布式系统</a>
+<a class="l3" href="#sec-2-2-1" data-ch="ch2">2.2.1 集群级基础设施</a>
+<a class="l4" href="#sec-2-2-1-1" data-ch="ch2">2.2.1.1 资源管理</a>
+<a class="l4" href="#sec-2-2-1-2" data-ch="ch2">2.2.1.2 基础基础设施软件</a>
+<a class="l3" href="#sec-2-2-2" data-ch="ch2">2.2.2 非结构化存储系统</a>
+<a class="l3" href="#sec-2-2-3" data-ch="ch2">2.2.3 结构化 WSC 存储</a>
+<a class="l3" href="#sec-2-2-4" data-ch="ch2">2.2.4 WAN 与边缘网络</a>
+<a class="l2" href="#sec-2-3" data-ch="ch2">2.3 基础设施管理</a>
+<a class="l3" href="#sec-2-3-1" data-ch="ch2">2.3.1 资源预置</a>
+<a class="l3" href="#sec-2-3-2" data-ch="ch2">2.3.2 配置与可观测性</a>
+<a class="l4" href="#sec-2-3-2-1" data-ch="ch2">2.3.2.1 配置管理</a>
+<a class="l4" href="#sec-2-3-2-2" data-ch="ch2">2.3.2.2 可观测性</a>
+<a class="l4" href="#sec-2-3-2-3" data-ch="ch2">2.3.2.3 追踪工具</a>
+<a class="l4" href="#sec-2-3-2-4" data-ch="ch2">2.3.2.4 性能工具</a>
+<a class="l3" href="#sec-2-3-3" data-ch="ch2">2.3.3 实践：DevOps 与 SRE</a>
+<a class="l2" href="#sec-2-4" data-ch="ch2">2.4 服务器级软件</a>
+<a class="l3" href="#sec-2-4-1" data-ch="ch2">2.4.1 操作系统与固件</a>
+<a class="l3" href="#sec-2-4-2" data-ch="ch2">2.4.2 容器化与虚拟化</a>
+<a class="l1" href="#ch3" data-ch="ch3">第 3 章 分布式系统基础设施：硬件</a>
+<a class="l2" href="#sec-3-1" data-ch="ch3">3.1 WSC 构建块与设计考量</a>
+<a class="l3" href="#sec-3-1-1" data-ch="ch3">3.1.1 整体架构</a>
+<a class="l3" href="#sec-3-1-2" data-ch="ch3">3.1.2 构建横向扩展系统</a>
+<a class="l4" href="#sec-3-1-2-1" data-ch="ch3">3.1.2.1 一个关于纵向扩展与横向扩展的模型</a>
+<a class="l4" href="#sec-3-1-2-2" data-ch="ch3">3.1.2.2 横向扩展的粒度：强壮核与孱弱核</a>
+<a class="l4" href="#sec-3-1-2-3" data-ch="ch3">3.1.2.3 加速器的纵向扩展对横向扩展</a>
+<a class="l2" href="#sec-3-2" data-ch="ch3">3.2 计算：服务器与机架</a>
+<a class="l3" href="#sec-3-2-1" data-ch="ch3">3.2.1 服务器硬件</a>
+<a class="l3" href="#sec-3-2-2" data-ch="ch3">3.2.2 硬件机架</a>
+<a class="l3" href="#sec-3-2-3" data-ch="ch3">3.2.3 把单台服务器看作分布式系统</a>
+<a class="l2" href="#sec-3-3" data-ch="ch3">3.3 加速器与定制硅片</a>
+<a class="l3" href="#sec-3-3-1" data-ch="ch3">3.3.1 专用化与摩尔定律的终结</a>
+<a class="l3" href="#sec-3-3-2" data-ch="ch3">3.3.2 ML 加速器与 TPU 系统</a>
+<a class="l4" href="#sec-3-3-2-1" data-ch="ch3">3.3.2.1 TPU</a>
+<a class="l4" href="#sec-3-3-2-2" data-ch="ch3">3.3.2.2 GPU</a>
+<a class="l3" href="#sec-3-3-3" data-ch="ch3">3.3.3 视频加速器与 VCU 系统</a>
+<a class="l2" href="#sec-3-4" data-ch="ch3">3.4 网络</a>
+<a class="l3" href="#sec-3-4-1" data-ch="ch3">3.4.1 从托盘到地球的完整网络</a>
+<a class="l3" href="#sec-3-4-2" data-ch="ch3">3.4.2 主机网络与智能网卡</a>
+<a class="l3" href="#sec-3-4-3" data-ch="ch3">3.4.3 集群网络</a>
+<a class="l3" href="#sec-3-4-4" data-ch="ch3">3.4.4 无骨干（Spine-less）网络</a>
+<a class="l3" href="#sec-3-4-5" data-ch="ch3">3.4.5 仓库规模数据中心里的光互联</a>
+<a class="l3" href="#sec-3-4-6" data-ch="ch3">3.4.6 专用网络</a>
+<a class="l3" href="#sec-3-4-7" data-ch="ch3">3.4.7 广域网（WAN）</a>
+<a class="l2" href="#sec-3-5" data-ch="ch3">3.5 存储</a>
+<a class="l3" href="#sec-3-5-1" data-ch="ch3">3.5.1 存储介质</a>
+<a class="l3" href="#sec-3-5-2" data-ch="ch3">3.5.2 无盘服务器</a>
+<a class="l3" href="#sec-3-5-3" data-ch="ch3">3.5.3 磁盘整机（Disk Appliance）</a>
+<a class="l3" href="#sec-3-5-4" data-ch="ch3">3.5.4 闪存整机（Flash Appliance）</a>
+<a class="l3" href="#sec-3-5-5" data-ch="ch3">3.5.5 智能存储</a>
+<a class="l1" href="#ch4" data-ch="ch4">第 4 章 数据中心基础设施：风火水电</a>
+<a class="l2" href="#sec-4-1" data-ch="ch4">4.1 数据中心基础设施基础</a>
+<a class="l3" href="#sec-4-1-1" data-ch="ch4">4.1.1 从地球到园区到楼宇</a>
+<a class="l3" href="#sec-4-1-2" data-ch="ch4">4.1.2 数据中心的基本结构</a>
+<a class="l3" href="#sec-4-1-3" data-ch="ch4">4.1.3 数据中心分级：Tier 体系</a>
+<a class="l3" href="#sec-4-1-4" data-ch="ch4">4.1.4 云与 AI 对数据中心设计的影响</a>
+<a class="l2" href="#sec-4-2" data-ch="ch4">4.2 数据中心供电系统</a>
+<a class="l3" href="#sec-4-2-1" data-ch="ch4">4.2.1 整体电力输送架构</a>
+<a class="l3" href="#sec-4-2-2" data-ch="ch4">4.2.2 交流与直流配电架构比较</a>
+<a class="l3" href="#sec-4-2-3" data-ch="ch4">4.2.3 不间断电源（UPS）</a>
+<a class="l3" href="#sec-4-2-4" data-ch="ch4">4.2.4 配电单元（PDU）</a>
+<a class="l3" href="#sec-4-2-5" data-ch="ch4">4.2.5 电力微电网与其它未来机会</a>
+<a class="l2" href="#sec-4-3" data-ch="ch4">4.3 数据中心制冷系统</a>
+<a class="l3" href="#sec-4-3-1" data-ch="ch4">4.3.1 整体制冷/机械架构</a>
+<a class="l3" href="#sec-4-3-2" data-ch="ch4">4.3.2 机房空调（CRAC）</a>
+<a class="l3" href="#sec-4-3-3" data-ch="ch4">4.3.3 冷水机组（Chiller）</a>
+<a class="l3" href="#sec-4-3-4" data-ch="ch4">4.3.4 自然冷却</a>
+<a class="l3" href="#sec-4-3-5" data-ch="ch4">4.3.5 冷却塔</a>
+<a class="l3" href="#sec-4-3-6" data-ch="ch4">4.3.6 气流设计考量</a>
+<a class="l3" href="#sec-4-3-7" data-ch="ch4">4.3.7 机架内、行内与液冷</a>
+<a class="l2" href="#sec-4-4" data-ch="ch4">4.4 数据中心其它设计考量</a>
+<a class="l3" href="#sec-4-4-1" data-ch="ch4">4.4.1 模块化数据中心设计：速度与效率</a>
+<a class="l3" href="#sec-4-4-2" data-ch="ch4">4.4.2 经济模型：五个信封</a>
+<a class="l3" href="#sec-4-4-3" data-ch="ch4">4.4.3 数据中心的物理自动化</a>
+<a class="l2" href="#sec-4-5" data-ch="ch4">4.5 历史回顾</a>
+</div>
+</aside>
+<div id="tocmask"></div>
+<nav id="tocdrawer" aria-label="目录">
+<div class="tocHd">目录<span id="tocclose" role="button" tabindex="0">关闭</span></div>
+<div class="tocTree" data-level="4">
+<a class="l1" href="#ch1" data-ch="ch1">第 1 章 引言</a>
+<a class="l2" href="#sec-1-1" data-ch="ch1">1.1 背景铺垫</a>
+<a class="l2" href="#sec-1-2" data-ch="ch1">1.2 仓库规模计算机（WSC）</a>
+<a class="l2" href="#sec-1-3" data-ch="ch1">1.3 区域与可用区</a>
+<a class="l2" href="#sec-1-4" data-ch="ch1">1.4 建筑与基础设施</a>
+<a class="l3" href="#sec-1-4-1" data-ch="ch1">1.4.1 服务器</a>
+<a class="l3" href="#sec-1-4-2" data-ch="ch1">1.4.2 存储</a>
+<a class="l3" href="#sec-1-4-3" data-ch="ch1">1.4.3 网络结构</a>
+<a class="l3" href="#sec-1-4-4" data-ch="ch1">1.4.4 能耗</a>
+<a class="l3" href="#sec-1-4-5" data-ch="ch1">1.4.5 故障与维修的应对</a>
+<a class="l2" href="#sec-1-5" data-ch="ch1">1.5 负载</a>
+<a class="l3" href="#sec-c1-s5-h1" data-ch="ch1">WSC 系统栈</a>
+<a class="l3" href="#sec-c1-s5-h2" data-ch="ch1">计算消费模型</a>
+<a class="l3" href="#sec-c1-s5-h3" data-ch="ch1">公有云与超大规模</a>
+<a class="l3" href="#sec-1-5-1" data-ch="ch1">1.5.1 通算负载</a>
+<a class="l4" href="#sec-1-5-1-1" data-ch="ch1">1.5.1.1 大致概览</a>
+<a class="l4" href="#sec-1-5-1-2" data-ch="ch1">1.5.1.2 案例研究：搜索</a>
+<a class="l4" href="#sec-1-5-1-3" data-ch="ch1">1.5.1.3 案例研究：YouTube</a>
+<a class="l4" href="#sec-1-5-1-4" data-ch="ch1">1.5.1.4 案例研究：Gmail</a>
+<a class="l3" href="#sec-1-5-2" data-ch="ch1">1.5.2 AI 负载</a>
+<a class="l4" href="#sec-1-5-2-1" data-ch="ch1">1.5.2.1 训练</a>
+<a class="l4" href="#sec-1-5-2-2" data-ch="ch1">1.5.2.2 推理</a>
+<a class="l4" href="#sec-1-5-2-3" data-ch="ch1">1.5.2.3 大语言模型</a>
+<a class="l4" href="#sec-1-5-2-4" data-ch="ch1">1.5.2.4 AI 计算的特征</a>
+<a class="l1" href="#ch2" data-ch="ch2">第 2 章 分布式系统基础设施：软件</a>
+<a class="l2" href="#sec-2-1" data-ch="ch2">2.1 软件栈总览</a>
+<a class="l2" href="#sec-2-2" data-ch="ch2">2.2 分布式系统</a>
+<a class="l3" href="#sec-2-2-1" data-ch="ch2">2.2.1 集群级基础设施</a>
+<a class="l4" href="#sec-2-2-1-1" data-ch="ch2">2.2.1.1 资源管理</a>
+<a class="l4" href="#sec-2-2-1-2" data-ch="ch2">2.2.1.2 基础基础设施软件</a>
+<a class="l3" href="#sec-2-2-2" data-ch="ch2">2.2.2 非结构化存储系统</a>
+<a class="l3" href="#sec-2-2-3" data-ch="ch2">2.2.3 结构化 WSC 存储</a>
+<a class="l3" href="#sec-2-2-4" data-ch="ch2">2.2.4 WAN 与边缘网络</a>
+<a class="l2" href="#sec-2-3" data-ch="ch2">2.3 基础设施管理</a>
+<a class="l3" href="#sec-2-3-1" data-ch="ch2">2.3.1 资源预置</a>
+<a class="l3" href="#sec-2-3-2" data-ch="ch2">2.3.2 配置与可观测性</a>
+<a class="l4" href="#sec-2-3-2-1" data-ch="ch2">2.3.2.1 配置管理</a>
+<a class="l4" href="#sec-2-3-2-2" data-ch="ch2">2.3.2.2 可观测性</a>
+<a class="l4" href="#sec-2-3-2-3" data-ch="ch2">2.3.2.3 追踪工具</a>
+<a class="l4" href="#sec-2-3-2-4" data-ch="ch2">2.3.2.4 性能工具</a>
+<a class="l3" href="#sec-2-3-3" data-ch="ch2">2.3.3 实践：DevOps 与 SRE</a>
+<a class="l2" href="#sec-2-4" data-ch="ch2">2.4 服务器级软件</a>
+<a class="l3" href="#sec-2-4-1" data-ch="ch2">2.4.1 操作系统与固件</a>
+<a class="l3" href="#sec-2-4-2" data-ch="ch2">2.4.2 容器化与虚拟化</a>
+<a class="l1" href="#ch3" data-ch="ch3">第 3 章 分布式系统基础设施：硬件</a>
+<a class="l2" href="#sec-3-1" data-ch="ch3">3.1 WSC 构建块与设计考量</a>
+<a class="l3" href="#sec-3-1-1" data-ch="ch3">3.1.1 整体架构</a>
+<a class="l3" href="#sec-3-1-2" data-ch="ch3">3.1.2 构建横向扩展系统</a>
+<a class="l4" href="#sec-3-1-2-1" data-ch="ch3">3.1.2.1 一个关于纵向扩展与横向扩展的模型</a>
+<a class="l4" href="#sec-3-1-2-2" data-ch="ch3">3.1.2.2 横向扩展的粒度：强壮核与孱弱核</a>
+<a class="l4" href="#sec-3-1-2-3" data-ch="ch3">3.1.2.3 加速器的纵向扩展对横向扩展</a>
+<a class="l2" href="#sec-3-2" data-ch="ch3">3.2 计算：服务器与机架</a>
+<a class="l3" href="#sec-3-2-1" data-ch="ch3">3.2.1 服务器硬件</a>
+<a class="l3" href="#sec-3-2-2" data-ch="ch3">3.2.2 硬件机架</a>
+<a class="l3" href="#sec-3-2-3" data-ch="ch3">3.2.3 把单台服务器看作分布式系统</a>
+<a class="l2" href="#sec-3-3" data-ch="ch3">3.3 加速器与定制硅片</a>
+<a class="l3" href="#sec-3-3-1" data-ch="ch3">3.3.1 专用化与摩尔定律的终结</a>
+<a class="l3" href="#sec-3-3-2" data-ch="ch3">3.3.2 ML 加速器与 TPU 系统</a>
+<a class="l4" href="#sec-3-3-2-1" data-ch="ch3">3.3.2.1 TPU</a>
+<a class="l4" href="#sec-3-3-2-2" data-ch="ch3">3.3.2.2 GPU</a>
+<a class="l3" href="#sec-3-3-3" data-ch="ch3">3.3.3 视频加速器与 VCU 系统</a>
+<a class="l2" href="#sec-3-4" data-ch="ch3">3.4 网络</a>
+<a class="l3" href="#sec-3-4-1" data-ch="ch3">3.4.1 从托盘到地球的完整网络</a>
+<a class="l3" href="#sec-3-4-2" data-ch="ch3">3.4.2 主机网络与智能网卡</a>
+<a class="l3" href="#sec-3-4-3" data-ch="ch3">3.4.3 集群网络</a>
+<a class="l3" href="#sec-3-4-4" data-ch="ch3">3.4.4 无骨干（Spine-less）网络</a>
+<a class="l3" href="#sec-3-4-5" data-ch="ch3">3.4.5 仓库规模数据中心里的光互联</a>
+<a class="l3" href="#sec-3-4-6" data-ch="ch3">3.4.6 专用网络</a>
+<a class="l3" href="#sec-3-4-7" data-ch="ch3">3.4.7 广域网（WAN）</a>
+<a class="l2" href="#sec-3-5" data-ch="ch3">3.5 存储</a>
+<a class="l3" href="#sec-3-5-1" data-ch="ch3">3.5.1 存储介质</a>
+<a class="l3" href="#sec-3-5-2" data-ch="ch3">3.5.2 无盘服务器</a>
+<a class="l3" href="#sec-3-5-3" data-ch="ch3">3.5.3 磁盘整机（Disk Appliance）</a>
+<a class="l3" href="#sec-3-5-4" data-ch="ch3">3.5.4 闪存整机（Flash Appliance）</a>
+<a class="l3" href="#sec-3-5-5" data-ch="ch3">3.5.5 智能存储</a>
+<a class="l1" href="#ch4" data-ch="ch4">第 4 章 数据中心基础设施：风火水电</a>
+<a class="l2" href="#sec-4-1" data-ch="ch4">4.1 数据中心基础设施基础</a>
+<a class="l3" href="#sec-4-1-1" data-ch="ch4">4.1.1 从地球到园区到楼宇</a>
+<a class="l3" href="#sec-4-1-2" data-ch="ch4">4.1.2 数据中心的基本结构</a>
+<a class="l3" href="#sec-4-1-3" data-ch="ch4">4.1.3 数据中心分级：Tier 体系</a>
+<a class="l3" href="#sec-4-1-4" data-ch="ch4">4.1.4 云与 AI 对数据中心设计的影响</a>
+<a class="l2" href="#sec-4-2" data-ch="ch4">4.2 数据中心供电系统</a>
+<a class="l3" href="#sec-4-2-1" data-ch="ch4">4.2.1 整体电力输送架构</a>
+<a class="l3" href="#sec-4-2-2" data-ch="ch4">4.2.2 交流与直流配电架构比较</a>
+<a class="l3" href="#sec-4-2-3" data-ch="ch4">4.2.3 不间断电源（UPS）</a>
+<a class="l3" href="#sec-4-2-4" data-ch="ch4">4.2.4 配电单元（PDU）</a>
+<a class="l3" href="#sec-4-2-5" data-ch="ch4">4.2.5 电力微电网与其它未来机会</a>
+<a class="l2" href="#sec-4-3" data-ch="ch4">4.3 数据中心制冷系统</a>
+<a class="l3" href="#sec-4-3-1" data-ch="ch4">4.3.1 整体制冷/机械架构</a>
+<a class="l3" href="#sec-4-3-2" data-ch="ch4">4.3.2 机房空调（CRAC）</a>
+<a class="l3" href="#sec-4-3-3" data-ch="ch4">4.3.3 冷水机组（Chiller）</a>
+<a class="l3" href="#sec-4-3-4" data-ch="ch4">4.3.4 自然冷却</a>
+<a class="l3" href="#sec-4-3-5" data-ch="ch4">4.3.5 冷却塔</a>
+<a class="l3" href="#sec-4-3-6" data-ch="ch4">4.3.6 气流设计考量</a>
+<a class="l3" href="#sec-4-3-7" data-ch="ch4">4.3.7 机架内、行内与液冷</a>
+<a class="l2" href="#sec-4-4" data-ch="ch4">4.4 数据中心其它设计考量</a>
+<a class="l3" href="#sec-4-4-1" data-ch="ch4">4.4.1 模块化数据中心设计：速度与效率</a>
+<a class="l3" href="#sec-4-4-2" data-ch="ch4">4.4.2 经济模型：五个信封</a>
+<a class="l3" href="#sec-4-4-3" data-ch="ch4">4.4.3 数据中心的物理自动化</a>
+<a class="l2" href="#sec-4-5" data-ch="ch4">4.5 历史回顾</a>
+</div>
+</nav>
+<button id="tocbtn" type="button">目录</button>
+<script>
+(function(){
+  var heads=[].slice.call(document.querySelectorAll("h2.chtitle, h2.chead"));
+  var links={};
+  [].forEach.call(document.querySelectorAll(".tocTree a"),function(a){
+    links[a.getAttribute("href").slice(1)]=a;
+  });
+  function upd(){
+    var y=window.pageYOffset+150, cur=null, chh=null;
+    for(var i=0;i<heads.length;i++){
+      if(heads[i].offsetTop<=y){
+        if(heads[i].classList.contains("chtitle")){chh=heads[i];cur=null;}
+        else{cur=heads[i];}
+      } else break;
+    }
+    [].forEach.call(document.querySelectorAll(".tocTree a.on"),function(a){a.classList.remove("on");});
+    [].forEach.call(document.querySelectorAll("h2.cur"),function(x){x.classList.remove("cur");});
+    if(cur){ if(links[cur.id]) links[cur.id].classList.add("on"); cur.classList.add("cur"); }
+    if(chh && (!cur||chh.id!==cur.id)){ if(links[chh.id]) links[chh.id].classList.add("on"); }
+  }
+  var last=0;
+  window.addEventListener("scroll",function(){
+    var now=Date.now();
+    if(now-last<60){return;}
+    last=now;
+    upd();
+  },{passive:true});
+  window.addEventListener("resize",upd);
+  upd();
+  if(window.IntersectionObserver){
+    try{
+      var io=new IntersectionObserver(function(){upd();},{rootMargin:"-140px 0px -60% 0px",threshold:0});
+      heads.forEach(function(x){io.observe(x);});
+    }catch(e){}
+  }
+  var btn=document.getElementById("tocbtn"),drawer=document.getElementById("tocdrawer"),
+      mask=document.getElementById("tocmask"),close=document.getElementById("tocclose");
+  function openD(){drawer.classList.add("open");mask.classList.add("open");document.body.style.overflow="hidden";}
+  function shutD(){drawer.classList.remove("open");mask.classList.remove("open");document.body.style.overflow="";}
+  if(btn) btn.addEventListener("click",openD);
+  if(mask) mask.addEventListener("click",shutD);
+  if(close) close.addEventListener("click",shutD);
+  [].forEach.call(document.querySelectorAll("#tocdrawer a"),function(a){a.addEventListener("click",shutD);});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")shutD();});
+})();
+</script>
 </body>
 </html>
