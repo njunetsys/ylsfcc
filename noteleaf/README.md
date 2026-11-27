@@ -29,7 +29,7 @@ CloudComputing/framework/
   anchors/            通用写作规则（ANCHOR_RULES.html）
   k1/                 素材获取种子表
   inputs/part4/       示例素材（FatTree / Jupiter 论文 Markdown）
-工具手册_Noteleaf.html   完整手册（19 节：组件设计 + 方法论 + 数据格式 + 扩展操作）
+noteleaf.html   完整手册（19 节：组件设计 + 方法论 + 数据格式 + 扩展操作）
 ```
 
 ## 快速开始
@@ -114,7 +114,7 @@ python3 tools/lf/pipeline_run.py --lecture <讲ID> --html <讲义.html> --json
 
 ## 文档
 
-完整手册见 [`工具手册_Noteleaf.html`](工具手册_Noteleaf.html)（单文件自包含，浏览器直接打开），19 节：
+完整手册见 [`noteleaf.html`](noteleaf.html)（单文件自包含，浏览器直接打开），19 节：
 
 - §1-2 设计哲学 + 六段流水线能力模型
 - §3-14 十三个组件逐个详解（方法 + 判据 + CLI + 实测校准记录）
