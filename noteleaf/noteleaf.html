@@ -140,9 +140,9 @@ python3 tools/lf/logic_order.py EXTRACT CloudComputing/framework/inputs/part4
 python3 tools/lf/logic_order.py PROPOSE CloudComputing/framework/inputs/part4 \
     --section 1.2 --current "传统三层架构,STP,CLOS,Fat-Tree,Leaf-Spine,Jupiter"
 
-# ③ 用实例契约跑四要素核对（演示 CHECK 输出格式）
+# ③ 用实例契约跑四要素核对（讲义 HTML 里要有 id="s12" 的节；没有会报 section 未找到，属正常）
 python3 tools/lf/intent_ga.py CHECK CloudComputing/framework/contracts/part4_s12.contract.json \
-    任意讲义.html --section-id s12</code></pre>
+    &lt;讲义.html&gt; --section-id s12</code></pre>
 
 <h3>0.6 第五步：体检你自己的讲义</h3>
 <p>拿任意一份单文件 HTML 讲义（例如本仓库 <code>lec03/</code> 的网络与接入讲义）试两道最常用的检查：</p>
