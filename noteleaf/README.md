@@ -114,8 +114,9 @@ python3 tools/lf/pipeline_run.py --lecture <讲ID> --html <讲义.html> --json
 
 ## 文档
 
-完整手册见 [`noteleaf.html`](noteleaf.html)（单文件自包含，浏览器直接打开），19 节：
+完整手册见 [`noteleaf.html`](noteleaf.html)（单文件自包含，浏览器直接打开）：
 
+- §0 快速上手（三种下载方式 / 环境确认 / 31 个文件逐个说明 / 首次运行 step by step）
 - §1-2 设计哲学 + 六段流水线能力模型
 - §3-14 十三个组件逐个详解（方法 + 判据 + CLI + 实测校准记录）
 - §15 配套写作方法论（cloud-lecture-writing 与 book-production 两个 skill 的精华：启动铁律 / 事实核查 / 机械清理 / 七条硬门禁 / 六条红线 / 五动作审稿）

@@ -37,6 +37,7 @@ nav a{color:#0969da;text-decoration:none;display:block;margin:2px 0}
 <p class="small">版本：2026-11-27 独立包版（v2 详尽版） · 代码：<code>tools/lf/</code>（13 个模块）+ <code>tools/check_chain.py</code> · 数据：<code>CloudComputing/framework/</code> · 纯 Python 标准库，无需安装任何第三方包 · 所有命令在包根目录运行</p>
 
 <nav>
+<a href="#s0">0 快速上手：下载 / 环境 / 目录 / 首次运行</a>
 <a href="#s1">1 总览与设计哲学</a>
 <a href="#s2">2 六段流水线与能力模型</a>
 <a href="#s3">3 组件详解：pipeline_run</a>
@@ -51,10 +52,106 @@ nav a{color:#0969da;text-decoration:none;display:block;margin:2px 0}
 <a href="#s12">12 组件详解：logic_order（逻辑顺序）</a>
 <a href="#s13">13 组件详解：memory（M2）</a>
 <a href="#s14">14 组件详解：doc_slice / spec</a>
-<a href="#s15">17 扩展操作：如何添加知识点</a>
-<a href="#s16">18 典型工作流</a>
-<a href="#s17">19 排错表</a>
+<a href="#s15">15 配套写作方法论</a>
+<a href="#s16">16 数据文件格式速查</a>
+<a href="#s17">17 扩展操作：如何添加知识点</a>
+<a href="#s18">18 典型工作流</a>
+<a href="#s19">19 排错表</a>
+<a href="#s20">附 设计原则红线</a>
 </nav>
+
+<h2 id="s0">0 快速上手：下载 / 环境 / 目录 / 首次运行</h2>
+<p>本节从零开始，照着做即可。全程只需要 Python 3.8+（macOS / Linux 自带），<b>不需要安装任何第三方包</b>。</p>
+
+<h3>0.1 第一步：下载工具包</h3>
+<p>仓库地址：<a href="https://github.com/njunetsys/ylsfcc">https://github.com/njunetsys/ylsfcc</a>，工具在仓库的 <code>noteleaf/</code> 目录（约 588KB，31 个文件）。三种下载方式任选其一：</p>
+<table>
+<tr><th>方式</th><th>操作</th><th>适合谁</th></tr>
+<tr><td>A 整仓克隆（推荐）</td><td><code>git clone https://github.com/njunetsys/ylsfcc.git</code><br>工具在 <code>ylsfcc/noteleaf/</code></td><td>有 git 的用户；后续更新只需 <code>git pull</code></td></tr>
+<tr><td>B 网页下载 ZIP</td><td>浏览器打开仓库页 → 绿色「Code」按钮 → Download ZIP → 解压 → 进入 <code>noteleaf/</code></td><td>不想装 git 的用户</td></tr>
+<tr><td>C 只取 noteleaf 目录</td><td><pre><code>git clone --depth 1 --filter=blob:none --sparse \
+    https://github.com/njunetsys/ylsfcc.git
+cd ylsfcc
+git sparse-checkout set noteleaf</code></pre></td><td>只要工具、不要讲义正文的用户</td></tr>
+</table>
+<p>下载后进入工具包根目录（以下所有命令都在这里跑）：</p>
+<pre><code>cd ylsfcc/noteleaf    # 方式 A/C；方式 B 则是 cd ylsfcc-main/noteleaf</code></pre>
+
+<h3>0.2 第二步：确认运行环境</h3>
+<pre><code>python3 --version     # 需要 3.8 及以上；macOS / Linux 自带，Windows 去 python.org 装一个即可
+ls                    # 应看到 README.md  noteleaf.html  tools  CloudComputing</code></pre>
+<div class="box">所有命令都在包根目录（能看到 <code>tools/</code> 和 <code>CloudComputing/</code> 的那一层）运行，因为工具按相对路径找 spec 与数据文件。</div>
+
+<h3>0.3 第三步：验证下载完整</h3>
+<pre><code># 两个自检命令，全部 OK 说明包完好
+python3 tools/lf/intent_ga.py --selfcheck
+python3 tools/lf/lecture_lint.py --selfcheck
+
+# spec 真源自检（段序必须 ASSET→ANCHOR→WRITE→GATE→REVIEW→DELIVER）
+python3 tools/lf/spec.py</code></pre>
+
+<h3>0.4 完整文件目录（31 个文件，逐个说明）</h3>
+<pre><code>noteleaf/
+├── README.md                      快速入门（组件一览表 / 数据格式 / FAQ）
+├── noteleaf.html                  本手册（单文件自包含，浏览器直接打开）
+├── .gitignore                     排除密钥与运行产物
+│
+├── tools/                         全部工具代码（纯 Python 标准库）
+│   ├── check_chain.py             GATE 门禁编排器（红线/自包含/外链六种门）
+│   └── lf/                        13 个流水线模块
+│       ├── pipeline_run.py        六段流水线唯一入口（编排）
+│       ├── k1_acquire.py          K1 素材获取（论文/厂商卡/教材，落工单）
+│       ├── doc_read.py            K2 解析（按格式选解析器，保结构）
+│       ├── asset_score.py         K2 评估（五维评分，透明可复核）
+│       ├── prefs.py               K3 偏好声明（只影响供料排序）
+│       ├── preflight.py           O2 写作前置门禁（偏好/认知锚/素材）
+│       ├── lecture_lint.py        机械痕迹体检 L1-L8（确定性定位）
+│       ├── rubric_check.py        G2 原子评测 R1-R7（二分判定+证据）
+│       ├── intent_ga.py           意图契约（四要素 CHECK + 顺序 ORDER）
+│       ├── logic_order.py         逻辑顺序（EXTRACT/PROPOSE/CONFIRM）
+│       ├── memory.py              M2 跨会话记忆（画像+决策，append-only）
+│       ├── doc_slice.py           按章切片（带行号，省 token 交接）
+│       ├── spec.py                spec 真源读取与校验
+│       └── __init__.py            包标记
+│
+└── CloudComputing/framework/      全部数据文件（JSON 均 UTF-8）
+    ├── spec/spec_v0.1.0.json      流水线单一真源（段序/能力/门禁名）
+    ├── contracts/                 意图契约
+    │   ├── _TEMPLATE.contract.json    契约模板（新增节复制它）
+    │   └── part4_s12.contract.json    实例：part4 第 1.2 节（含 order_anchors）
+    ├── vocab/part4_known_terms.json   封闭术语词表（锁版本）
+    ├── prefs/02_弹性计算_prefs.json   写作偏好声明实例
+    ├── anchors/ANCHOR_RULES.html      通用写作规则（认知锚，九节部件）
+    ├── k1/paper_seeds.json            论文种子表（标准知识点锚）
+    └── inputs/part4/                  示例素材（可直接跑通全流程）
+        ├── manifest.json              素材真源清单
+        ├── concept_map.json           概念映射表（pats + prereq）
+        └── marker_out/                FatTree / Jupiter 论文 Markdown
+            ├── cs244_paper_FatTree_sigcomm08/（.md + _meta.json）
+            └── cs244_paper_Jupiter_sigcomm22/（.md + _meta.json）</code></pre>
+<p class="small">运行时还会自动生成（不在包内）：<code>asset_ledger.jsonl</code>（素材台账）、<code>k1/tickets.jsonl</code>（工单）、<code>memory/</code>（画像与决策）、<code>review/</code>（完整证据）、<code>.workbuddy/ledger/ledger.jsonl</code>（门禁 run 记录）。</p>
+
+<h3>0.5 第四步：首次运行（用包内示例素材跑通）</h3>
+<p>包里自带 FatTree / Jupiter 两篇论文的 Markdown 素材，可以不准备任何材料先跑通一遍：</p>
+<pre><code># ① 从素材抽概念顺序（应看到 FatTree/Jupiter 各自的章节骨架与引言序）
+python3 tools/lf/logic_order.py EXTRACT CloudComputing/framework/inputs/part4
+
+# ② 生成讲述顺序候选并打分（当前讲义顺序应得 1.0 分排第一）
+python3 tools/lf/logic_order.py PROPOSE CloudComputing/framework/inputs/part4 \
+    --section 1.2 --current "传统三层架构,STP,CLOS,Fat-Tree,Leaf-Spine,Jupiter"
+
+# ③ 用实例契约跑四要素核对（演示 CHECK 输出格式）
+python3 tools/lf/intent_ga.py CHECK CloudComputing/framework/contracts/part4_s12.contract.json \
+    任意讲义.html --section-id s12</code></pre>
+
+<h3>0.6 第五步：体检你自己的讲义</h3>
+<p>拿任意一份单文件 HTML 讲义（例如本仓库 <code>lec03/</code> 的网络与接入讲义）试两道最常用的检查：</p>
+<pre><code># 机械痕迹体检：破折号/画外音/空锚文本/图引用（FAIL 必须清零，WARN 逐条人工核验）
+python3 tools/lf/lecture_lint.py 你的讲义.html
+
+# 结构与忠实度体检：空节/无来源断言/图无引用 + 待回源清单
+python3 tools/lf/rubric_check.py 你的讲义.html</code></pre>
+<p>到这里就算入门了。接下来按需求读对应章节：想用全链去 §3（pipeline_run），想加知识点去 §17，想看每个组件的设计去 §3 至 §14。</p>
 
 <h2 id="s1">1 总览与设计哲学</h2>
 <p>Noteleaf 是云计算讲义（6 份自包含单文件 HTML，part1 至 part6）的生产框架。它不是「一键生成器」，而是一条<b>人机分工的质检链</b>：机器负责可复现的定位与核对，人负责裁决与创作。</p>
